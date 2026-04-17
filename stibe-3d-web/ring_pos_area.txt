@@ -1,0 +1,96 @@
+ts = poissonDisk.fill();
+
+                    const nearestPoints = []
+                    for (let i = 0; i < pointsBase.length; i++) {
+                        let nearestPoint = null;
+                        let nearestDistance = Infinity;
+                        for (let j = 0; j < points.length; j++) {
+                            if( Math.random() < .75) { continue; }
+                            const distance = Math.sqrt(Math.pow(points[j][0] - pointsBase[i][0], 2) + Math.pow(points[j][1] - pointsBase[i][1], 2));
+                            const pixelRedValue = distanceFunction(points[j], imageData);
+                            // if (distance < nearestDistance) {
+                            if (pixelRedValue < 1 && distance < nearestDistance) {
+                                nearestDistance = distance;
+                                nearestPoint = points[j];
+                            }
+                        }
+                        nearestPoints.push(
+                            nearestPoint[0] - 250,
+                            nearestPoint[1] - 250
+                        );
+                    }
+
+                    self.postMessage({ nearestPoints, index });
+                };
+            `,a=new Blob([s],{type:"application/javascript"}),l=URL.createObjectURL(a),c=new Worker(l);c.onmessage=function(u){let{nearestPoints:f,index:h}=u.data;c.terminate(),URL.revokeObjectURL(l),r({nearestPoints:f,index:h})},c.onerror=function(u){console.error("Worker error:",u),c.terminate(),URL.revokeObjectURL(l),o(u)},c.postMessage({imageData:e,pointsBase:t,index:i,density:this.scene.density})})}createDataTexturePosition(e){let t=new Float32Array(this.length*4);for(let r=0;r<this.count;r++){let o=r*4;t[o+0]=e[r*2+0]*(1/250),t[o+1]=e[r*2+1]*(1/250),t[o+2]=0,t[o+3]=0}let i=new Jd(t,this.size,this.size,br,No);return i.needsUpdate=!0,i}createRenderTarget(){return new ko(this.size,this.size,{wrapS:qa,wrapT:qa,minFilter:Xi,magFilter:Xi,texture:this.posTex,format:br,type:Za,depthBuffer:!1,stencilBuffer:!1})}setPointsTextureFromIndex(e){this.posNearestTex=this.createDataTexturePosition(this.nearestPointsData[e]),this.posNearestTex.needsUpdate=!0,this.simMaterial.uniforms.uPosNearest=this.posNearestTex}init(){this.size=256,this.length=this.size*this.size,this.posTex=this.createDataTexturePosition(this.pointsData),this.posNearestTex=this.createDataTexturePosition(this.nearestPointsData[0]),this.rt1=this.createRenderTarget(),this.rt2=this.createRenderTarget(),this.renderer.setRenderTarget(this.rt1),this.renderer.setClearColor(0,0),this.renderer.clear(),this.renderer.setRenderTarget(this.rt2),this.renderer.setClearColor(0,0),this.renderer.clear(),this.renderer.setRenderTarget(null),this.noise=new Rb,this.simScene=new la,this.simCamera=new mu(-1,1,1,-1,0,1),this.simMaterial=new Rr({uniforms:{uPosition:{value:this.posTex},uPosRefs:{value:this.posTex},uPosNearest:{value:this.posNearestTex},uMousePos:{value:new qt(0,0)},uRingRadius:{value:.2},uDeltaTime:{value:0},uRingWidth:{value:.05},uRingWidth2:{value:.015},uIsHovering:{value:0},uRingDisplacement:{value:this.scene.ringDisplacement},uTime:{value:0}},vertexShader:`
+                void main() {
+                    gl_Position = vec4(position, 1.0);
+                }
+            `,fragmentShader:`
+                precision highp float;
+                uniform sampler2D uPosition;
+                uniform sampler2D uPosRefs;
+                uniform sampler2D uPosNearest;
+
+                uniform vec2 uMousePos;
+                uniform float uTime;
+                uniform float uDeltaTime;
+                uniform float uIsHovering;
+
+                vec2 hash( vec2 p ){
+                    p = vec2( dot(p,vec2(2127.1,81.17)), dot(p,vec2(1269.5,283.37)) );
+                    return fract(sin(p)*43758.5453);
+                }
+
+                void main() {
+
+                    vec2 simTexCoords = gl_FragCoord.xy / vec2(${this.size.toFixed(1)}, ${this.size.toFixed(1)});
+                    vec4 pFrame = texture2D(uPosition, simTexCoords);
+
+                    float scale = pFrame.z;
+                    float velocity = pFrame.w;
+                    vec2 refPos = texture2D(uPosRefs, simTexCoords).xy;
+                    vec2 nearestPos = texture2D(uPosNearest, simTexCoords).xy;
+                    float seed = hash(simTexCoords).x;
+                    float seed2 = hash(simTexCoords).y;
+
+                    float time = uTime * .5;
+                    float lifeEnd = 3. + sin(seed2 * 100.) * 1.;
+                    float lifeTime = mod((seed * 100.) + time, lifeEnd);
+
+                    vec2 disp = vec2(0., 0.);
+                    vec2 pos = pFrame.xy;
+
+                    float distRadius = 0.15;
+
+                    vec2 targetPos = refPos;
+                    targetPos = mix(targetPos, nearestPos, uIsHovering * uIsHovering);
+
+                    vec2 direction = normalize(targetPos - pos);
+                    direction *= .01;
+
+                    float dist = length(targetPos - pos);
+                    float distStrength = smoothstep(distRadius, 0., dist);
+
+                    if(dist > 0.005){
+                        pos += direction * distStrength;
+                    }
+
+                    if(lifeTime < .01){
+                        pos = refPos;
+                        pFrame.xy = refPos;
+                        scale = 0.;
+                    }
+
+                    // Add scale
+                    float targetScale = smoothstep(.01, 0.5, lifeTime) - smoothstep(0.5, 1., lifeTime/lifeEnd);
+                    targetScale += smoothstep(0.1, 0., smoothstep(0.001, .1, dist)) * 1.5 * uIsHovering;
+                    // targetScale *= distStrength;
+
+                    float scaleDiff = targetScale - scale;
+                    scaleDiff *= .1;
+                    scale += scaleDiff;
+
+                    // Final position
+                    vec2 finalPos = pos + (disp * smoothstep(0.001, distRadius, dist));
+                    vec2 diff = finalPos - pFrame.

@@ -1,0 +1,26 @@
+{
+  "this.ringWidth": {
+    "pos": 1229772,
+    "context": "his.camera.position.z=3.1}initScene(){this.colorControls={color1:this.theme===\"dark\"?\"#7189ff\":\"#2c64ed\",color2:this.theme===\"dark\"?\"#3074f9\":\"#f84242\",color3:this.theme===\"dark\"?\"#000000\":\"#ffcf03\"},this.ringWidth=this.options.ringWidth||.107,this.ringWidth2=this.options.ringWidth2||.05,this.ringDisplacement=this.options.ringDisplacement||.15,this.initParticles(),this.options.gui&&this.initGUI(),this.onLoaded()}initParticles(){this.particles=new i7(this)}initGUI(){this.gui=new Ob({autoPlace:!1}),this.options.container.appendChild(this.gui.domElement),this.gui.domElement.style.position=\"absolu"
+  },
+  "this.ringWidth2": {
+    "pos": 1229816,
+    "context": "olorControls={color1:this.theme===\"dark\"?\"#7189ff\":\"#2c64ed\",color2:this.theme===\"dark\"?\"#3074f9\":\"#f84242\",color3:this.theme===\"dark\"?\"#000000\":\"#ffcf03\"},this.ringWidth=this.options.ringWidth||.107,this.ringWidth2=this.options.ringWidth2||.05,this.ringDisplacement=this.options.ringDisplacement||.15,this.initParticles(),this.options.gui&&this.initGUI(),this.onLoaded()}initParticles(){this.particles=new i7(this)}initGUI(){this.gui=new Ob({autoPlace:!1}),this.options.container.appendChild(this.gui.domElement),this.gui.domElement.style.position=\"absolute\",this.gui.domElement.style.top=\"0\",this.g"
+  },
+  "this.density": {
+    "pos": 1201269,
+    "context": "|\"dark\",this.interactive=!1,this.options.background=this.theme===\"dark\"?new zt(1184535):new zt(16777215),this.pixelRatio=e.pixelRatio||window.devicePixelRatio,this.particlesScale=e.particlesScale||.5,this.density=e.density||150,this.cameraZoom=e.cameraZoom||3.5,this.verbose=e.verbose||!1,this.onLoadedCallback=e.onLoaded||null,this.isHovering=!1,this.hoverProgress=0,this.pushProgress=0,this.scene=new la,this.scene.background=this.options.background,this.canvas=document.createElement(\"canvas\"),this.options.container.appendChild(this.canvas),this.canvas.width=this.options.container.offsetWidth,th"
+  },
+  "this.particlesScale": {
+    "pos": 1201228,
+    "context": "3bbfc\",this.options=e,this.theme=e.theme||\"dark\",this.interactive=!1,this.options.background=this.theme===\"dark\"?new zt(1184535):new zt(16777215),this.pixelRatio=e.pixelRatio||window.devicePixelRatio,this.particlesScale=e.particlesScale||.5,this.density=e.density||150,this.cameraZoom=e.cameraZoom||3.5,this.verbose=e.verbose||!1,this.onLoadedCallback=e.onLoaded||null,this.isHovering=!1,this.hoverProgress=0,this.pushProgress=0,this.scene=new la,this.scene.background=this.options.background,this.canvas=document.createElement(\"canvas\"),this.options.container.appendChild(this.canvas),this.canvas.wi"
+  },
+  "this.ringDisplacement": {
+    "pos": 1229861,
+    "context": "89ff\":\"#2c64ed\",color2:this.theme===\"dark\"?\"#3074f9\":\"#f84242\",color3:this.theme===\"dark\"?\"#000000\":\"#ffcf03\"},this.ringWidth=this.options.ringWidth||.107,this.ringWidth2=this.options.ringWidth2||.05,this.ringDisplacement=this.options.ringDisplacement||.15,this.initParticles(),this.options.gui&&this.initGUI(),this.onLoaded()}initParticles(){this.particles=new i7(this)}initGUI(){this.gui=new Ob({autoPlace:!1}),this.options.container.appendChild(this.gui.domElement),this.gui.domElement.style.position=\"absolute\",this.gui.domElement.style.top=\"0\",this.gui.domElement.style.right=\"0\",this.gui.domEle"
+  },
+  "particleScale": {
+    "pos": 1165841,
+    "context": "er=e.renderer,this.gl=this.gl,this.camera=e.camera,this.textures=t,this.lastTime=0,this.everRendered=!1,this.mousePos=new qt(0,0),this.cursorPos=new qt(0,0),this.colorScheme=e.theme===\"dark\"?0:1,this.particleScale=this.scene.renderer.domElement.width/this.scene.pixelRatio/2e3*this.scene.particlesScale}static async create(e,t){let i=new n(e,t);return i.createPoints(),await i.createPointsFromImage(),i.init(),i}async getImageData(e){return new Promise((t,i)=>{let r=new Image;r.src=e,r.onload=()=>{let o=document.createElement(\"canvas\");o.width=500,o.height=500;let s=o.getContext(\"2d\");s.drawImage("
+  }
+}

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stibe Labs - Engineering Intelligent Digital Ecosystems</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e5e5;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #5f6bf0;
+        }
+
+        .cta-button {
+            background: #5f6bf0;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #4a52c7;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%);
+            padding: 120px 2rem 100px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #5f6bf0;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4a52c7;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #5f6bf0;
+            border: 2px solid #5f6bf0;
+        }
+
+        .btn-secondary:hover {
+            background: #5f6bf0;
+            color: white;
+        }
+
+        /* Intro Section */
+        .intro {
+            padding: 4rem 2rem;
+            background: #f9f9fb;
+            text-align: center;
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Use Cases Section */
+        .use-cases {
+            padding: 6rem 2rem;
+            background: #ffffff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #1a1a1a;
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .use-case-card {
+            background: #f5f5f7;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .use-case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+        }
+
+        .use-case-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .use-case-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .use-case-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Core Capabilities Section */
+        .capabilities {
+            padding: 6rem 2rem;
+            background: #f9f9fb;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .capability-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #e5e5e5;
+            transition: all 0.3s;
+        }
+
+        .capability-card:hover {
+            border-color: #5f6bf0;
+            box-shadow: 0 10px 30px rgba(95, 107, 240, 0.1);
+        }
+
+        .capability-card h3 {
+            font-size: 1.2rem;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .capability-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: #ffffff;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: center;
+        }
+
+        .feature-item:nth-child(even) {
+            grid-template-columns: 1fr 1fr;
+            direction: rtl;
+        }
+
+        .feature-item:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .feature-content h3 {
+            font-size: 1.8rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .feature-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-image {
+            background: #f5f5f7;
+            height: 300px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        /* Industries Section */
+        .industries {
+            padding: 6rem 2rem;
+            background: #f9f9fb;
+        }
+
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .industry-badge {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e5e5e5;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .industry-badge:hover {
+            border-color: #5f6bf0;
+            transform: translateY(-4px);
+        }
+
+        .industry-badge p {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        /* Platforms Section */
+        .platforms {
+            padding: 6rem 2rem;
+            background: #ffffff;
+        }
+
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 3rem;
+        }
+
+        .platform-card {
+            background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid #e5e5e5;
+            transition: all 0.3s;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .platform-card h3 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .platform-card .subtitle {
+            color: #5f6bf0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .platform-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Why Stibe Section */
+        .why-stibe {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #5f6bf0 0%, #4a52c7 100%);
+            color: white;
+        }
+
+        .why-stibe-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .why-stibe h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .why-stibe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .why-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .why-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 4rem 2rem;
+            background: #f9f9fb;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .feature-item, .feature-item:nth-child(even) {
+                grid-template-columns: 1fr;
+                direction: ltr;
+            }
+
+            .feature-item:nth-child(even) > * {
+                direction: ltr;
+            }
+
+            .use-cases-grid, .capabilities-grid, .platforms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Stibe Labs</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#solutions">Solutions</a></li>
+                <li><a href="#platforms">Platforms</a></li>
+                <li><a href="#industries">Industries</a></li>
+                <li><a href="#contact" class="cta-button">Request Demo</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Engineering Intelligent Digital Ecosystems</h1>
+            <p>AI-powered software, automation platforms, and SaaS systems designed for scalable, performance-driven enterprises.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">Get Started</button>
+                <button class="btn btn-secondary">Book a Demo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro" id="about">
+        <div class="intro-content">
+            <h2>Who We Are</h2>
+            <p>Stibe Labs Pvt Ltd is a digital transformation and intelligent automation company delivering enterprise software, AI-driven systems, and industry-specific SaaS platforms. We're not just a service company — we're a multi-vertical SaaS and digital infrastructure company.</p>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="use-cases">
+        <h2 class="section-title">Built for Enterprise Leaders</h2>
+        <div class="use-cases-grid">
+            <div class="use-case-card">
+                <div class="use-case-icon">🏢</div>
+                <h3>Enterprise Teams</h3>
+                <p>Scalable frameworks and vertically integrated ecosystems for large organizations.</p>
+            </div>
+            <div class="use-case-card">
+                <div class="use-case-icon">🚀</div>
+                <h3>Growth-Stage Companies</h3>
+                <p>SaaS + Service hybrid models for rapid scaling and market expansion.</p>
+            </div>
+            <div class="use-case-card">
+                <div class="use-case-icon">🤖</div>
+                <h3>AI-First Organizations</h3>
+                <p>AI-first architecture and intelligent automation for competitive advantage.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Capabilities Section -->
+    <section class="capabilities" id="solutions">
+        <h2 class="section-title">Core Capabilities</h2>
+        <div class="capabilities-grid">
+            <div class="capability-card">
+                <h3>💼 Enterprise Software & ERP</h3>
+                <p>Robust, scalable enterprise solutions tailored for complex organizational needs.</p>
+            </div>
+            <div class="capability-card">
+                <h3>📱 Mobile & App Development</h3>
+                <p>High-performance mobile and native applications for seamless user experiences.</p>
+            </div>
+            <div class="capability-card">
+                <h3>☁️ Web & Cloud Infrastructure</h3>
+                <p>Modern cloud-native architectures and cloud infrastructure optimization.</p>
+            </div>
+            <div class="capability-card">
+                <h3>🤖 AI & Automation</h3>
+                <p>Intelligent automation systems and AI-powered decision-making engines.</p>
+            </div>
+            <div class="capability-card">
+                <h3>📊 Digital Growth Systems</h3>
+                <p>Data-driven platforms for digital marketing and customer acquisition.</p>
+            </div>
+            <div class="capability-card">
+                <h3>🎨 Branding & Media</h3>
+                <p>Strategic branding, design, and multimedia solutions for market presence.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section class="platforms" id="platforms">
+        <h2 class="section-title">Featured Platforms</h2>
+        <div class="platforms-grid">
+            <div class="platform-card">
+                <h3>Stibe CRM</h3>
+                <div class="subtitle">Lead Lifecycle & Conversion System</div>
+                <p>Comprehensive customer relationship management platform designed to streamline lead tracking, nurture, and conversion. Automate sales workflows and maximize customer lifetime value.</p>
+            </div>
+            <div class="platform-card">
+                <h3>Stibe LMS</h3>
+                <div class="subtitle">Learning & Academic Platform</div>
+                <p>Enterprise learning management system for educational institutions and corporate training programs. Deliver engaging content, track progress, and scale learning initiatives.</p>
+            </div>
+            <div class="platform-card">
+                <h3>Stibe Salon Booking</h3>
+                <div class="subtitle">Appointment & Service Automation</div>
+                <p>Complete booking and service management platform for salons and personal care businesses. Reduce no-shows, optimize scheduling, and enhance customer experience.</p>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <a href="#" class="btn btn-primary">Explore Platforms</a>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="industries" id="industries">
+        <h2 class="section-title">Industries We Serve</h2>
+        <div class="industries-grid">
+            <div class="industry-badge">
+                <p>🎓 Education</p>
+            </div>
+            <div class="industry-badge">
+                <p>💅 Salon & Personal Care</p>
+            </div>
+            <div class="industry-badge">
+                <p>🏭 Manufacturing</p>
+            </div>
+            <div class="industry-badge">
+                <p>📦 Logistics</p>
+            </div>
+            <div class="industry-badge">
+                <p>🛍️ Retail & E-commerce</p>
+            </div>
+            <div class="industry-badge">
+                <p>🏥 Healthcare</p>
+            </div>
+            <div class="industry-badge">
+                <p>🚀 Startups & SMEs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Stibe Section -->
+    <section class="why-stibe">
+        <div class="why-stibe-content">
+            <h2>Why Choose Stibe Labs?</h2>
+            <div class="why-stibe-grid">
+                <div class="why-item">
+                    <h3>🎯 AI-First Architecture</h3>
+                    <p>Built on cutting-edge AI and machine learning for intelligent, adaptive systems.</p>
+                </div>
+                <div class="why-item">
+                    <h3>⚙️ Vertically Integrated</h3>
+                    <p>Complete ecosystem of solutions from infrastructure to application layer.</p>
+                </div>
+                <div class="why-item">
+                    <h3>🔄 SaaS + Service Hybrid</h3>
+                    <p>Flexible model combining SaaS efficiency with personalized service excellence.</p>
+                </div>
+                <div class="why-item">
+                    <h3>📈 Enterprise Frameworks</h3>
+                    <p>Scalable, battle-tested frameworks designed for enterprise-grade reliability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <h2>Let's Build Your Digital Infrastructure</h2>
+        <p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;">Transform your business with AI-powered solutions and scalable digital platforms.</p>
+        <button class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem;">Request Demo</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Stibe Labs Pvt Ltd. All rights reserved.</p>
+        <p>Engineering Intelligent Digital Ecosystems | AI-Powered Automation Platforms</p>
+    </footer>
+</body>
+</html>

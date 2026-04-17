@@ -1,0 +1,104 @@
+# STIBE LABS: INTEGRATED DIGITAL ECOSYSTEM
+
+## 1. OVERVIEW: THE INTEGRATED PLATFORM
+
+Stibe Labs Pvt Ltd delivers a fully integrated platform ecosystem combining CRM, LMS, automation, and communication systems into a unified digital infrastructure. Unlike fragmented tools, the Stibe ecosystem ensures a seamless flow across the entire business and academic lifecycle.
+
+**The Integrated Journey**
+* Lead Acquisition: Multi-channel capture and tracking.
+* Sales Pipeline: Automated lead nurturing and management.
+* Demo & Conversion: Integrated scheduling and feedback loops.
+* Learning Delivery: Comprehensive academic tools.
+* Student Lifecycle Management: Long-term engagement and data tracking.
+
+**Core Value:** A complete Lead Student Growth journey powered by intelligent systems.
+
+---
+
+## 2. STIBE CRM
+**Intelligent Lead & Conversion Engine**
+
+**Overview:** Stibe CRM is a powerful, AI-enabled customer lifecycle management platform designed to handle high-volume lead environments with precision and automation. It transforms traditional CRM into a real-time conversion system with integrated telephony, WhatsApp, and AI-driven insights.
+
+**Core Features**
+
+| Feature Category | Description |
+| :--- | :--- |
+| Lead Management | Capture leads from 7 channels; smart duplicate detection; custom drag-and-drop pipelines. |
+| Communication | Cloud telephony (click-to-call, IVR); WhatsApp automation; full conversation tracking. |
+| Sales & Deals | Visual Kanban pipelines; probability forecasting; detailed activity timelines. |
+| Marketing Integration | Real-time Meta Ads syncing (Facebook/Instagram); CPL, CTR, and CPM dashboards. |
+
+---
+
+## 3. ENCELADUS AI
+**Real-Time Business Intelligence, Powered by Your Data**
+
+**Overview:** Enceladus is the built-in AI business intelligence engine within Stibe CRM, designed to transform raw business data into actionable insights—instantly. It eliminates the need for manual reporting by acting as a live, intelligent decision-support system.
+
+**Key Capabilities**
+* **Natural Language Analytics:** Ask questions like "How many leads came from Facebook this week?" or "What is our current pipeline conversion rate?" to receive instant, data-backed responses.
+* **Sales & Pipeline Intelligence:** Real-time analysis of conversion rates, stage-wise drop-offs, and revenue forecasting based on deal probability.
+* **Marketing & Campaign Insights:** Track performance metrics like CPL, CTR, CPC, and ROI at a campaign level with high-cost alerts.
+* **Communication & Call Analytics:** Monitor connected rates, duration trends, and WhatsApp engagement to analyze lead interaction history.
+* **Team & Operational Analysis:** Track agent-wise performance, lead handling efficiency, and manage pending or overdue tasks through automated timelines.
+
+---
+
+## 4. STIBE LMS
+**Intelligent Learning & Academic Management System**
+
+**Overview:** Stibe LMS is a next-generation learning platform designed to replace fragmented tools like Zoom and standalone spreadsheets. It serves as a unified hub for classrooms, exams, and institutional operations.
+
+**Core Features**
+* **Live Classroom System:** HD video classrooms via self-hosted WebRTC, including screen sharing, whiteboard, and real-time attendance tracking.
+* **AI-Powered Monitoring:** Real-time student attention tracking, behavior monitoring (tab switching/inactivity), and personalized AI assistants.
+* **Exams & Academics:** AI-generated question banks, live timed exams, instant grading, and performance reports.
+* **Institutional ERP:** Comprehensive fee management, HR/payroll systems, and automated timetable generation.
+* **Automation:** Fully automated WhatsApp and email notifications for class alerts and fee updates.
+
+---
+
+## 5. THE CRM + LMS INTEGRATION
+The core strength of the Stibe ecosystem lies in the seamless data sync between sales and operations.
+
+### Stibe CRM <-> LMS Integration Flow
+*One Lead. One Journey. Seamless Experience.*
+
+**Workflow Stages:**
+1. **Lead Generated:** Ads / WhatsApp / Call / Form / Email.
+2. **Lead Management (CRM):** Track, Score, Assign & Follow-up.
+3. **Send Demo (CRM):** Create & Share Demo Link via WhatsApp.
+4. **Demo Registration (LMS):** Student Registers for Demo Session (Webhook: Demo Registered).
+5. **Live Demo (LMS):** Teacher Conducts Live Demo Class (Webhook: Demo Completed).
+6. **Feedback & Interest (CRM):** Agent Captures Feedback & Updates Stage (Interested / Not Interested).
+7. **Enrollment (CRM -> LMS):** Send Enrollment Link & Complete Payment (Fee: ₹12,500).
+8. **Payment Confirmed & Account Created (LMS):** Student Account Auto Created After Payment (Webhook: Payment Confirmed).
+9. **Learning Lifecycle (LMS):** Classes, Attendance, Exams, Reports & Growth.
+
+**Two-Way Integration Sync:**
+* **CRM Updates (Automatic):** Demo Registered, Demo Completed, Student Interest, Payment Confirmed, Student Lifecycle Status.
+* **LMS Updates (Automatic):** Demo Registration, Demo Completion, Enrollment, Payment Status, Student Activity & Progress.
+
+**One Platform. Connected Workflows. Better Conversions. Smarter Learning.**
+Stibe CRM and LMS work together to create a seamless journey from Lead to Lifelong Learner.
+
+### The Automated Workflow
+1. **Lead Acquisition:** Leads enter the CRM via ads or messaging.
+2. **Demo Automation:** Agents trigger demo links; students register via WhatsApp; teachers are auto-assigned in the LMS.
+3. **Conversion:** Student feedback is captured instantly to move the deal forward.
+4. **Onboarding:** Upon payment, student accounts are automatically provisioned in the LMS.
+5. **Lifecycle Management:** Continuous monitoring of student performance and attendance.
+
+---
+
+## 6. UNIFIED PLATFORM ADVANTAGE
+
+| Aspect | Traditional Setup | Stibe Ecosystem |
+| :--- | :--- | :--- |
+| **Infrastructure** | Zoom + Sheets + CRM + WhatsApp | One unified platform |
+| **Efficiency** | Manual tracking and data entry | Automated workflows |
+| **Analytics** | Static reports and manual exports | Enceladus AI Real-time insights |
+| **Scalability** | High operational overhead | Scalable digital infrastructure |
+
+**Value Proposition:** One platform. Every role. Every workflow. Fully integrated.

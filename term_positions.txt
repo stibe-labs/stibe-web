@@ -1,0 +1,10 @@
+﻿gl_PointSize : 0 occurrences at positions: 
+uRingWidth : 0 occurrences at positions: 
+uMousePos : 0 occurrences at positions: 
+uPosNearest : 0 occurrences at positions: 
+uIsHovering : 0 occurrences at positions: 
+uParticleScale : 0 occurrences at positions: 
+uRingDisplacement : 0 occurrences at positions: 
+uAlpha : 0 occurrences at positions: 
+uPulseProgress : 0 occurrences at positions: 
+uColorScheme : 0 occurrences at positions: 
