@@ -26,7 +26,7 @@ const cardVariants = {
     transition: {
       delay: i * 0.08,
       duration: 0.65,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
     },
   }),
 };
@@ -36,7 +36,7 @@ const featureVariants = {
   visible: (j: number) => ({
     opacity: 1,
     x: 0,
-    transition: { delay: j * 0.06, duration: 0.4, ease: 'easeOut' },
+    transition: { delay: j * 0.06, duration: 0.4, ease: 'easeOut' as const },
   }),
 };
 

@@ -315,7 +315,7 @@ export default function Home() {
                 >
                   <Link href={p.link} className="block group">
                     <div className="relative aspect-square bg-black rounded-[40px] overflow-hidden mb-8 transition-all duration-700">
-                      {p.isVideo ? (
+                      {(p as any).isVideo ? (
                         <video 
                           autoPlay 
                           muted 
