@@ -27,7 +27,10 @@ export default function Contact() {
       `Message:\n${message}`
     );
 
-    window.location.href = `mailto:Info@stibe.in?subject=${subject}&body=${body}`;
+    // Open Gmail compose directly in a new tab
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=Info@stibe.in&su=${subject}&body=${body}`;
+    window.open(gmailUrl, '_blank');
+
     setSubmitted(true);
   };
 
@@ -148,8 +151,14 @@ export default function Contact() {
                   <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-6">
                     <Send size={24} className="text-green-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-black mb-3">Redirecting...</h3>
-                  <p className="text-neutral-600">Your email client should open shortly with your message.</p>
+                  <h3 className="text-2xl font-bold text-black mb-3">Gmail Opened!</h3>
+                  <p className="text-neutral-600 mb-6">A new tab has been opened with Gmail compose. Please review and send the email.</p>
+                  <button 
+                    onClick={() => setSubmitted(false)} 
+                    className="px-6 py-3 rounded-xl bg-black/5 border border-black/10 text-black font-semibold hover:bg-black/10 transition-all"
+                  >
+                    Send Another Message
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">

@@ -1,1 +1,0 @@
-Q9=(n,e,t,i,r)=>(n-e)*(r-i)/(t-e)+i,eI=class n{constructor(e,t){this.scene=e,this.renderer=e.renderer,this.gl=this.gl,this.camera=e.camera,this.textures=t,this.lastTime=0,this.everRendered=!1,this.mousePos=new qt(0,0),this.cursorPos=new qt(0,0),this.colorScheme=e.theme==="dark"?0:1,this.particleScal
