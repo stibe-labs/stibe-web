@@ -40,7 +40,7 @@ export default function About() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="relative pt-32 pb-24 px-6 overflow-hidden min-h-[60vh] flex items-center">
+      <section className="relative pt-32 pb-24 px-6 overflow-x-clip min-h-[60vh] flex items-center">
         <div className="absolute inset-0 hero-grid" />
         <div className="absolute inset-0 radial-fade" />
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-accent/8 rounded-full blur-[100px]" />
@@ -391,7 +391,7 @@ export default function About() {
       </section>
 
       {/* Closing */}
-      <section className="py-32 px-6 relative overflow-hidden">
+      <section className="py-32 px-6 relative overflow-x-clip">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[120px]" />
         <div className="container mx-auto max-w-4xl text-center relative z-10">
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-body-premium text-neutral-700 leading-relaxed text-center mb-10 max-w-4xl mx-auto">

@@ -21,7 +21,7 @@ export default function SymbolWaveSection() {
   const displayIcons = [...antigravityIcons, ...antigravityIcons, ...antigravityIcons, ...antigravityIcons];
 
   return (
-    <section className="relative py-32 md:py-40 overflow-hidden bg-[#F8F9FC]">
+    <section className="relative py-32 md:py-40 overflow-x-clip bg-[#F8F9FC]">
       {/* 1:1 REPLICA OF THE SYMBOL WAVE */}
       <div className="relative mb-24 h-48 flex items-center">
         <motion.div 

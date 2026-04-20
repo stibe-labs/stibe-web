@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function CinematicVideoSection() {
   return (
-    <section className="py-24 md:py-32 px-0 overflow-hidden bg-white flex justify-center">
+    <section className="py-24 md:py-32 px-0 overflow-x-clip bg-white flex justify-center">
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}

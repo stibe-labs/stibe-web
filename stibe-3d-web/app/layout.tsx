@@ -3,6 +3,7 @@ import { Outfit } from 'next/font/google';
 import '../styles/globals.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import PageTransition from '../components/PageTransition';
 
 const fontMain = Outfit({ 
   subsets: ['latin'],
@@ -28,7 +29,9 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen bg-white text-black">
         <Navbar />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
       </body>
     </html>

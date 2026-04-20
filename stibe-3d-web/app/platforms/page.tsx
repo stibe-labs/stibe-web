@@ -78,7 +78,7 @@ export default function Platforms() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="relative pt-32 pb-24 px-6 overflow-hidden min-h-[50vh] flex items-center">
+      <section className="relative pt-32 pb-24 px-6 overflow-x-clip min-h-[50vh] flex items-center">
         <div className="absolute inset-0 hero-grid" />
         <div className="absolute inset-0 radial-fade" />
         <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-accent/8 rounded-full blur-[100px]" />
@@ -185,7 +185,7 @@ export default function Platforms() {
       </section>
 
       {/* CRM + LMS Integration */}
-      <section className="py-16 md:py-24 px-4 md:px-6 bg-white overflow-hidden relative">
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-white overflow-x-clip relative">
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>

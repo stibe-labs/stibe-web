@@ -33,7 +33,7 @@ export default function PlatformFeature({
   icon: Icon
 }: PlatformFeatureProps) {
   return (
-    <section id={id} className="py-24 md:py-32 px-6 overflow-hidden scroll-mt-32">
+    <section id={id} className="py-24 md:py-32 px-6 overflow-x-clip scroll-mt-32">
       <div className="container mx-auto max-w-7xl">
         <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 lg:gap-24`}>
           

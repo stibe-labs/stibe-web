@@ -175,7 +175,7 @@ export default function Home() {
     <div className="flex flex-col">
 
       {/* HERO */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden bg-white">
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-x-clip bg-white">
         <ParticlesBackground />
         <div className="absolute inset-0 hero-grid opacity-70" />
         <div className="absolute inset-0 hero-particle-glow" />
@@ -243,9 +243,50 @@ export default function Home() {
         reverse={false}
       />
 
-      {/* CORE CAPABILITIES */}
-      {/* CORE CAPABILITIES - HORIZONTAL SCROLL */}
-      <section ref={capabilitiesRef} className="relative h-[400vh]" id="capabilities">
+      {/* CORE CAPABILITIES - MOBILE SWIPE */}
+      <section className="md:hidden py-20 relative overflow-x-clip" id="capabilities">
+        <div className="px-6 mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-left"
+          >
+            <h2 className="text-[36px] font-medium tracking-tightest leading-tight text-black mb-4">
+              Core Capabilities
+            </h2>
+            <p className="text-body-premium text-neutral-500 max-w-xl">
+              Building the digital backbone for modern organizations through integrated expertise and vertically integrated digital ecosystems.
+            </p>
+          </motion.div>
+        </div>
+        <div className="flex overflow-x-auto gap-4 pb-6 no-scrollbar snap-x snap-mandatory px-6">
+          {capabilities.map((cap, i) => (
+            <motion.div
+              key={cap.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              className="glass-card p-7 snap-center w-[calc(100vw-48px)] flex-shrink-0 flex flex-col justify-center min-h-[240px]"
+            >
+              <div className="w-12 h-12 rounded-2xl bg-black/5 border border-black/10 flex items-center justify-center mb-6">
+                <cap.icon size={24} className="text-black" />
+              </div>
+              <h3 className="text-[19px] font-semibold mb-3 text-black tracking-tightest leading-tight">{cap.title}</h3>
+              <p className="text-body-premium text-neutral-500 text-[14px] leading-relaxed">{cap.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+        <div className="flex justify-center gap-1.5 mt-6">
+          {capabilities.map((_, i) => (
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-black/20" />
+          ))}
+        </div>
+      </section>
+
+      {/* CORE CAPABILITIES - DESKTOP HORIZONTAL SCROLL */}
+      <section ref={capabilitiesRef} className="relative h-[400vh] hidden md:block" id="capabilities-desktop">
         <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
           <div className="container mx-auto max-w-7xl px-6 mb-16">
             <motion.div
@@ -268,7 +309,7 @@ export default function Home() {
       </section>
 
       {/* FEATURED PLATFORMS (ANTIGRAVITY STYLE) */}
-      <section className="py-[120px] px-6 relative overflow-hidden bg-white">
+      <section className="py-[120px] px-6 relative overflow-x-clip bg-white">
         <div className="container mx-auto max-w-7xl relative">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
             <motion.div
@@ -448,7 +489,7 @@ export default function Home() {
       <CinematicVideoSection />
 
       {/* CTA */}
-      <section className="py-[var(--section-padding)] px-6 relative overflow-hidden">
+      <section className="py-[var(--section-padding)] px-6 relative overflow-x-clip">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[150px]" />
         <div className="container mx-auto max-w-4xl text-center relative z-10">
           <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="heading-hero mb-8 text-gradient">

@@ -120,14 +120,14 @@ function SolutionVideoShowcase() {
   const Icon = solutionVideos[active].icon;
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
+    <section className="py-24 px-6 relative overflow-x-clip">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-accent/5 rounded-full blur-[160px] pointer-events-none" />
       <div className="container mx-auto max-w-7xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           className="mb-14"
         >
           <p className="text-sm font-medium text-neutral-400 uppercase tracking-widest mb-3">Deep Dive</p>
@@ -136,31 +136,35 @@ function SolutionVideoShowcase() {
 
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
           {/* Tab list */}
-          <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-visible w-full lg:w-72 flex-shrink-0 pb-2 lg:pb-0">
-            {solutionVideos.map((s, i) => {
-              const TabIcon = s.icon;
-              return (
-                <button
-                  key={s.title}
-                  onClick={() => setActive(i)}
-                  className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl text-left transition-all duration-300 whitespace-nowrap lg:whitespace-normal w-full flex-shrink-0 ${
-                    active === i
-                      ? 'bg-black text-white shadow-lg'
-                      : 'bg-black/4 text-neutral-500 hover:bg-black/8 hover:text-black'
-                  }`}
-                >
-                  <span className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300 ${
-                    active === i ? 'bg-white/15' : 'bg-black/6'
-                  }`}>
-                    <TabIcon size={16} className={active === i ? 'text-white' : 'text-black/50'} />
-                  </span>
-                  <span className="text-sm font-semibold">{s.title}</span>
-                  {active === i && (
-                    <ChevronRight size={14} className="ml-auto flex-shrink-0 text-white/60" />
-                  )}
-                </button>
-              );
-            })}
+          <div className="relative w-full lg:w-72 flex-shrink-0">
+            <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto no-scrollbar lg:overflow-visible pb-2 lg:pb-0">
+              {solutionVideos.map((s, i) => {
+                const TabIcon = s.icon;
+                return (
+                  <button
+                    key={s.title}
+                    onClick={() => setActive(i)}
+                    className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl text-left transition-all duration-300 whitespace-nowrap lg:whitespace-normal flex-shrink-0 lg:w-full ${
+                      active === i
+                        ? 'bg-black text-white shadow-lg'
+                        : 'bg-black/[0.04] text-neutral-500 hover:bg-black/[0.08] hover:text-black'
+                    }`}
+                  >
+                    <span className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300 ${
+                      active === i ? 'bg-white/15' : 'bg-black/[0.06]'
+                    }`}>
+                      <TabIcon size={16} className={active === i ? 'text-white' : 'text-black/50'} />
+                    </span>
+                    <span className="text-sm font-semibold">{s.title}</span>
+                    {active === i && (
+                      <ChevronRight size={14} className="ml-auto flex-shrink-0 text-white/60" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+            {/* Right fade hint – mobile only */}
+            <div className="pointer-events-none absolute top-0 right-0 h-full w-10 bg-gradient-to-l from-white to-transparent lg:hidden" />
           </div>
 
           {/* Video panel */}
@@ -171,7 +175,7 @@ function SolutionVideoShowcase() {
                 initial={{ opacity: 0, scale: 0.97, y: 16 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.97, y: -16 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                 ref={panelRef}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
@@ -196,7 +200,7 @@ function SolutionVideoShowcase() {
                       initial={{ opacity: 0, scale: 0.7 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.7 }}
-                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                       style={{
                         position: 'absolute',
                         top: 0,
@@ -240,7 +244,7 @@ export default function Solutions() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="relative pt-32 pb-24 px-6 overflow-hidden min-h-[50vh] flex items-center">
+      <section className="relative pt-32 pb-24 px-6 overflow-x-clip min-h-[50vh] flex items-center">
         <div className="absolute inset-0 hero-grid" />
         <div className="absolute inset-0 radial-fade" />
         <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-accent/8 rounded-full blur-[100px]" />
@@ -261,14 +265,14 @@ export default function Solutions() {
       </section>
 
       {/* Video Section */}
-      <section className="py-20 px-6 relative overflow-hidden">
+      <section className="py-20 px-6 relative overflow-x-clip">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent/6 rounded-full blur-[140px] pointer-events-none" />
         <div className="container mx-auto max-w-7xl relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.96, y: 32 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: 0.1 }}
             className="relative rounded-3xl overflow-hidden shadow-2xl border border-black/8 bg-black"
             style={{ aspectRatio: '16 / 9' }}
           >
@@ -306,7 +310,7 @@ export default function Solutions() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: i * 0.08 + 0.2, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ delay: i * 0.08 + 0.2, duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                     className="w-16 h-16 rounded-2xl bg-black/5 border border-black/10 flex items-center justify-center mb-8 group-hover:bg-black transition-all duration-500 shadow-sm"
                   >
                     <sol.icon size={28} className="text-black group-hover:text-white transition-colors duration-500" />
@@ -344,7 +348,7 @@ export default function Solutions() {
       <SolutionVideoShowcase />
 
       {/* Closing */}
-      <section className="py-32 px-6 relative overflow-hidden">
+      <section className="py-32 px-6 relative overflow-x-clip">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[120px]" />
         <div className="container mx-auto max-w-7xl text-center relative z-10">
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl md:text-3xl text-neutral-700 leading-relaxed font-medium tracking-tight mb-10">
