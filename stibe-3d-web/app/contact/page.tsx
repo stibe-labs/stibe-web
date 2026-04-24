@@ -37,7 +37,7 @@ export default function Contact() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="relative pt-32 pb-24 px-6 overflow-x-clip min-h-[50vh] flex items-center">
+      <section className="relative pt-24 pb-14 px-6 overflow-x-clip min-h-[50vh] flex items-center">
         <div className="absolute inset-0 hero-grid" />
         <div className="absolute inset-0 radial-fade" />
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-accent/8 rounded-full blur-[100px]" />
@@ -58,7 +58,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Content */}
-      <section className="py-16 md:py-24 px-6">
+      <section className="py-10 md:py-14 px-6">
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Contact Info */}
@@ -75,8 +75,8 @@ export default function Contact() {
                       key={i}
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                     >
                       {item.href ? (
                         <a href={item.href} className="flex items-center gap-5 p-4 -ml-4 rounded-2xl hover:bg-black/5 transition-colors duration-300 group cursor-pointer block">
@@ -131,7 +131,7 @@ export default function Contact() {
                     'Transparent timeline and pricing',
                   ].map((item, i) => (
                     <li key={i} className="relative z-10 text-neutral-700 text-base flex items-start gap-3 group-hover:text-black transition-colors duration-300 font-medium">
-                      <span className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(var(--accent),0.5)]" />
+                      <span className="w-2 h-2 rounded-full bg-black mt-2 flex-shrink-0 shadow-[0_0_6px_rgba(0,0,0,0.25)]" />
                       {item}
                     </li>
                   ))}
@@ -143,7 +143,8 @@ export default function Contact() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="glass-panel p-8 md:p-10 hover:shadow-2xl hover:border-black/20 transition-all duration-500"
             >
               {submitted ? (

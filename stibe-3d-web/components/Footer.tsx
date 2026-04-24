@@ -35,7 +35,7 @@ export default function Footer() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2 }}
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-gradient">
@@ -55,7 +55,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-16">
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <Link href="/" className="flex items-center mb-6">
-              <Image src="/logo.png" alt="Stibe Labs Logo" width={260} height={70} className="w-auto h-12 md:h-16 object-contain" />
+              <Image src="/logo.png" alt="Stibe Labs Logo" width={460} height={120} className="w-auto h-32 md:h-48 object-contain" />
             </Link>
             <p className="text-neutral-500 text-sm leading-relaxed max-w-xs">
               Engineering Intelligent Digital Ecosystems. AI-powered software, automation platforms, and SaaS systems.

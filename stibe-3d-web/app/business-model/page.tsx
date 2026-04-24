@@ -44,7 +44,7 @@ export default function BusinessModel() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="relative pt-32 pb-24 px-6 overflow-hidden min-h-[50vh] flex items-center">
+      <section className="relative pt-24 pb-14 px-6 overflow-hidden min-h-[50vh] flex items-center">
         <div className="absolute inset-0 hero-grid" />
         <div className="absolute inset-0 radial-fade" />
         <div className="absolute top-1/3 right-1/3 w-[400px] h-[400px] bg-accent/8 rounded-full blur-[100px]" />
@@ -67,7 +67,7 @@ export default function BusinessModel() {
       {/* Revenue Streams */}
       <section className="py-[var(--section-padding)] px-6">
         <div className="container mx-auto max-w-6xl">
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="heading-section mb-16 text-center text-gradient">
+          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="heading-section mb-16 text-center text-gradient">
             Revenue Streams
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -76,8 +76,8 @@ export default function BusinessModel() {
                 key={stream.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="glass-card p-8 group flex flex-col"
               >
                 <div className="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-6 group-hover:bg-accent group-hover:shadow-glow transition-all duration-500">
@@ -103,7 +103,7 @@ export default function BusinessModel() {
       {/* How We Deliver Value */}
       <section className="py-24 px-6">
         <div className="container mx-auto max-w-5xl">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="glass-panel p-10 md:p-16 text-center relative overflow-hidden">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }} className="glass-panel p-10 md:p-16 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-purple-500/5 pointer-events-none" />
             <h3 className="heading-section mb-8 text-black relative z-10 text-center">How We Deliver Value</h3>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0 relative z-10 mb-8">
@@ -131,12 +131,12 @@ export default function BusinessModel() {
       <section className="py-[var(--section-padding)] px-6 relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[120px]" />
         <div className="container mx-auto max-w-4xl text-center relative z-10">
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="heading-section mb-12 text-gradient">
+          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="heading-section mb-12 text-gradient">
             Our Focus
           </motion.h2>
           <div className="space-y-4 mb-12">
             {['Increase recurring SaaS revenue', 'Build industry-specific platforms', 'Deliver scalable digital ecosystems'].map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-xl md:text-2xl text-neutral-700 font-normal tracking-tight">
+              <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className="text-xl md:text-2xl text-neutral-700 font-normal tracking-tight">
                 {item}
               </motion.div>
             ))}

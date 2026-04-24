@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -555,12 +555,35 @@ function ParticleSystem() {
 
 /* ── exported wrapper ─────────────────────────────────── */
 export default function ParticlesBackground() {
+  // Skip the heavy GPGPU particle simulation on mobile / low-power devices
+  // and when the user prefers reduced motion — keeps animations smooth.
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isCoarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    const isNarrow = window.innerWidth < 768;
+    const lowCores =
+      typeof navigator !== 'undefined' &&
+      (navigator as any).hardwareConcurrency &&
+      (navigator as any).hardwareConcurrency < 4;
+    if (reduce || isCoarse || isNarrow || lowCores) {
+      setEnabled(false);
+      return;
+    }
+    setEnabled(true);
+  }, []);
+
+  if (!enabled) return null;
+
   return (
     <div className="absolute inset-0 z-0 pointer-events-none">
       <Canvas
-        dpr={[1, 2]}
+        dpr={[1, 1.5]}
         camera={{ fov: 40, near: 0.1, far: 1000, position: [0, 0, CAMERA_ZOOM] }}
         gl={{ alpha: true, antialias: true, powerPreference: 'high-performance', precision: 'highp', stencil: false }}
+        frameloop="always"
       >
         <ParticleSystem />
       </Canvas>

@@ -130,16 +130,35 @@ function VideoZoomSection() {
 }
 
 function HorizontalCapabilities({ targetRef }: { targetRef: React.RefObject<HTMLElement> }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [maxScroll, setMaxScroll] = useState(0);
+
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ['start start', 'end end'],
   });
 
-  const x = useTransform(scrollYProgress, [0.1, 0.9], ['0%', '-65%']);
+  // Measure the real overflow distance in pixels so every card is reachable
+  // regardless of viewport width or card min-width breakpoint.
+  useEffect(() => {
+    const measure = () => {
+      if (trackRef.current) {
+        const trackWidth = trackRef.current.scrollWidth;
+        const viewportWidth = window.innerWidth;
+        setMaxScroll(Math.max(0, trackWidth - viewportWidth));
+      }
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+
+  const x = useTransform(scrollYProgress, [0.1, 0.9], [0, -maxScroll]);
 
   return (
     <div className="relative w-full overflow-visible">
       <motion.div
+        ref={trackRef}
         style={{ x }}
         className="flex gap-8 px-6 md:px-[10%]"
       >
@@ -148,11 +167,11 @@ function HorizontalCapabilities({ targetRef }: { targetRef: React.RefObject<HTML
             key={cap.title}
             className="glass-card p-12 group cursor-default min-w-[85vw] md:min-w-[450px] lg:min-w-[550px] flex flex-col justify-center min-h-[300px]"
           >
-            <div className="w-20 h-20 rounded-3xl bg-black/5 border border-black/10 flex items-center justify-center mb-10 group-hover:bg-black group-hover:border-black transition-all duration-500 shadow-sm group-hover:shadow-2xl">
-              <cap.icon size={40} className="text-black group-hover:text-white transition-colors duration-500" />
+            <div className="w-20 h-20 rounded-3xl bg-black/5 border border-black/10 flex items-center justify-center mb-10 group-hover:bg-black group-hover:border-black transition-[background-color,border-color,box-shadow] duration-300 shadow-sm group-hover:shadow-2xl">
+              <cap.icon size={40} className="text-black group-hover:text-white transition-colors duration-300" />
             </div>
             <h3 className="text-2xl md:text-3xl font-semibold mb-6 text-black tracking-tightest leading-[1.05]">{cap.title}</h3>
-            <p className="text-body-premium text-neutral-500 max-w-md group-hover:text-black transition-colors duration-500">{cap.desc}</p>
+            <p className="text-body-premium text-neutral-500 max-w-md group-hover:text-black transition-colors duration-300">{cap.desc}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -202,10 +221,10 @@ export default function Home() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12">
-            <Link href="/solutions" className="w-full sm:w-auto px-10 py-5 rounded-full bg-black text-white font-bold text-lg hover:bg-neutral-900 transition-all text-center shadow-xl hover:shadow-black/20">
+            <Link href="/solutions" className="w-full sm:w-auto px-7 py-3.5 sm:px-10 sm:py-5 rounded-full bg-black text-white font-bold text-base sm:text-lg hover:bg-neutral-900 transition-[background-color,box-shadow,transform] duration-300 text-center shadow-xl hover:shadow-black/20">
               Get Started
             </Link>
-            <Link href="/contact" className="group w-full sm:w-auto px-10 py-5 rounded-full bg-black/5 border border-black/10 hover:bg-black/10 transition-all flex items-center justify-center gap-3 font-semibold text-black text-lg backdrop-blur-sm">
+            <Link href="/contact" className="group w-full sm:w-auto px-7 py-3.5 sm:px-10 sm:py-5 rounded-full bg-black/5 border border-black/10 hover:bg-black/10 transition-[background-color,border-color] duration-300 flex items-center justify-center gap-3 font-semibold text-black text-base sm:text-lg backdrop-blur-sm">
               Book a Demo
               <ChevronRight size={20} className="group-hover:translate-x-1.5 transition-transform" />
             </Link>
@@ -244,12 +263,13 @@ export default function Home() {
       />
 
       {/* CORE CAPABILITIES - MOBILE SWIPE */}
-      <section className="md:hidden py-20 relative overflow-x-clip" id="capabilities">
+      <section className="md:hidden py-14 relative overflow-x-clip" id="capabilities">
         <div className="px-6 mb-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="text-left"
           >
             <h2 className="text-[36px] font-medium tracking-tightest leading-tight text-black mb-4">
@@ -266,8 +286,8 @@ export default function Home() {
               key={cap.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: i * 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="glass-card p-7 snap-center w-[calc(100vw-48px)] flex-shrink-0 flex flex-col justify-center min-h-[240px]"
             >
               <div className="w-12 h-12 rounded-2xl bg-black/5 border border-black/10 flex items-center justify-center mb-6">
@@ -290,9 +310,10 @@ export default function Home() {
         <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
           <div className="container mx-auto max-w-7xl px-6 mb-16">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="text-left"
             >
               <h2 className="text-[40px] md:text-[54px] font-medium tracking-tightest leading-tight text-black mb-4">
@@ -315,7 +336,8 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="text-left"
             >
               <h2 className="text-[40px] md:text-[54px] font-medium tracking-tightest leading-tight text-black mb-4">
@@ -329,40 +351,39 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Link href="/platforms" className="px-8 py-3.5 rounded-full bg-neutral-100 hover:bg-neutral-200 text-black font-semibold text-[15px] transition-all duration-300 flex items-center gap-2">
+              <Link href="/platforms" className="px-8 py-3.5 rounded-full bg-neutral-100 hover:bg-neutral-200 text-black font-semibold text-[15px] transition-colors duration-300 flex items-center gap-2">
                 View all platforms
               </Link>
             </motion.div>
           </div>
 
           <div className="relative group/carousel">
-            <motion.div 
-              ref={carouselRef as any}
+            <div 
+              ref={carouselRef}
               className="flex gap-6 overflow-x-auto pb-12 no-scrollbar snap-x snap-mandatory"
               style={{ scrollbarWidth: 'none' }}
-              drag="x"
-              dragConstraints={{ right: 0, left: -400 }} // Simplified constraint
             >
               {platforms.map((p, i) => (
                 <motion.div
                   key={p.name}
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                   className="min-w-[300px] md:min-w-[420px] snap-start"
                 >
                   <Link href={p.link} className="block group">
-                    <div className="relative aspect-square bg-black rounded-[40px] overflow-hidden mb-8 transition-all duration-700">
+                    <div className="relative aspect-square bg-black rounded-[40px] overflow-hidden mb-8 transition-[transform,box-shadow] duration-500">
                       {(p as any).isVideo ? (
                         <video 
                           autoPlay 
                           muted 
                           loop 
                           playsInline 
-                          className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-1000"
+                          className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
                         >
                           <source src={p.image} type="video/mp4" />
                         </video>
@@ -370,12 +391,12 @@ export default function Home() {
                         <img 
                           src={p.image} 
                           alt={p.name}
-                          className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000"
+                          className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
                         />
                       )}
                       
                       <div className="absolute inset-0 flex items-center justify-center p-8">
-                        <span className="text-3xl md:text-4xl font-semibold text-white text-center tracking-tightest leading-tight group-hover:scale-105 transition-transform duration-700">
+                        <span className="text-3xl md:text-4xl font-semibold text-white text-center tracking-tightest leading-tight group-hover:scale-105 transition-transform duration-500">
                           {p.name}
                         </span>
                       </div>
@@ -391,7 +412,7 @@ export default function Home() {
                       <div className="pt-4 flex items-center gap-1.5 text-[15px] font-semibold text-black overflow-hidden">
                         <span className="relative">
                           Explore platform
-                          <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-black group-hover:w-full transition-all duration-500" />
+                          <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-black group-hover:w-full transition-[width] duration-500" />
                         </span>
                         <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
                       </div>
@@ -399,7 +420,7 @@ export default function Home() {
                   </Link>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
             
             {/* Nav Arrows (Visual/Layout match) */}
             <div className="absolute -bottom-4 left-0 flex items-center gap-4">
@@ -423,12 +444,13 @@ export default function Home() {
       </section>
 
       {/* PLATFORM ECOSYSTEM */}
-      <section className="py-20 px-6">
+      <section className="py-14 px-6">
         <div className="container mx-auto max-w-5xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="glass-panel p-10 md:p-16 text-center relative overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-purple-500/5 pointer-events-none" />
@@ -455,12 +477,12 @@ export default function Home() {
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             <div>
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="heading-section mb-12 text-gradient">
+              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="heading-section mb-12 text-gradient">
                 Why Stibe
               </motion.h2>
               <div className="space-y-5">
                 {whyStibe.map((item, i) => (
-                  <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="flex items-center gap-5 py-5 border-b border-black/[0.06] last:border-b-0">
+                  <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className="flex items-center gap-5 py-5 border-b border-black/[0.06] last:border-b-0">
                     <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0">
                       <item.icon size={20} className="text-accent" />
                     </div>
@@ -470,12 +492,12 @@ export default function Home() {
               </div>
             </div>
             <div className="lg:pl-16 lg:border-l lg:border-black/[0.06]">
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="heading-section mb-12 text-gradient">
+              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="heading-section mb-12 text-gradient">
                 Industries
               </motion.h2>
               <div className="space-y-4">
                 {industries.map((ind, i) => (
-                  <motion.div key={ind} initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="py-4 border-b border-black/[0.06] last:border-b-0 text-xl md:text-2xl text-neutral-600 font-normal tracking-tight hover:text-black transition-colors cursor-default">
+                  <motion.div key={ind} initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ delay: i * 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className="py-4 border-b border-black/[0.06] last:border-b-0 text-xl md:text-2xl text-neutral-600 font-normal tracking-tight hover:text-black transition-colors cursor-default">
                     {ind}
                   </motion.div>
                 ))}
@@ -492,14 +514,14 @@ export default function Home() {
       <section className="py-[var(--section-padding)] px-6 relative overflow-x-clip">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[150px]" />
         <div className="container mx-auto max-w-4xl text-center relative z-10">
-          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="heading-hero mb-8 text-gradient">
+          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }} className="heading-hero mb-8 text-gradient">
             Let&apos;s Build Your Digital Infrastructure
           </motion.h2>
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-body-premium text-neutral-600 mb-10 max-w-2xl mx-auto">
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ delay: 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="text-body-premium text-neutral-600 mb-10 max-w-2xl mx-auto">
             Ready to transition from fragmented tools to a unified digital ecosystem?
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-            <Link href="/contact" className="inline-block px-10 py-5 rounded-full bg-accent text-white font-bold text-lg hover:shadow-glow-lg transition-all">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
+            <Link href="/contact" className="inline-block px-10 py-5 rounded-full bg-accent text-white font-bold text-lg hover:shadow-glow-lg transition-shadow duration-300">
               Start the Transformation
             </Link>
           </motion.div>

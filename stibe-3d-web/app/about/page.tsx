@@ -40,7 +40,7 @@ export default function About() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="relative pt-32 pb-24 px-6 overflow-x-clip min-h-[60vh] flex items-center">
+      <section className="relative pt-24 pb-14 px-6 overflow-x-clip min-h-[60vh] flex items-center">
         <div className="absolute inset-0 hero-grid" />
         <div className="absolute inset-0 radial-fade" />
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-accent/8 rounded-full blur-[100px]" />
@@ -61,24 +61,24 @@ export default function About() {
       </section>
 
       {/* Who We Are */}
-      <section className="py-24 px-6">
+      <section className="py-14 px-6">
         <div className="container mx-auto max-w-7xl">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="space-y-8">
-            <h2 className="heading-section text-gradient">Who We Are</h2>
-            <p className="text-body-premium text-neutral-700 leading-relaxed max-w-4xl">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={{ show: { transition: { staggerChildren: 0.15 } } }} className="space-y-8">
+            <motion.h2 variants={fadeUp} className="heading-section text-gradient">Who We Are</motion.h2>
+            <motion.p variants={fadeUp} className="text-body-premium text-neutral-700 leading-relaxed max-w-4xl">
               Stibe Labs Pvt Ltd operates at the intersection of software engineering, artificial intelligence, and digital growth systems, enabling organizations to transition into fully integrated, data-driven enterprises. With a strong foundation in research-backed innovation and practical execution, Stibe Labs delivers solutions that are not only technically robust but also commercially effective.
-            </p>
-            <p className="text-body-premium text-neutral-700 leading-relaxed max-w-4xl">
+            </motion.p>
+            <motion.p variants={fadeUp} className="text-body-premium text-neutral-700 leading-relaxed max-w-4xl">
               Stibe Labs is structured to support long-term digital evolution, helping clients move beyond fragmented tools toward unified digital infrastructures.
-            </p>
+            </motion.p>
           </motion.div>
         </div>
       </section>
 
       {/* What We Do */}
-      <section className="py-24 px-6">
+      <section className="py-14 px-6">
         <div className="container mx-auto max-w-7xl">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="space-y-[var(--element-gap)]">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="space-y-[var(--element-gap)]">
             <h2 className="heading-section text-black mb-12">What We Do</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[
@@ -91,28 +91,25 @@ export default function About() {
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
                   whileHover={{ y: -8, scale: 1.02 }}
                   onClick={() => toggleFlip(i)}
-                  style={{ perspective: '1000px', cursor: 'pointer', minHeight: '260px' }}
-                  className="relative group"
+                  style={{ perspective: '1000px', cursor: 'pointer' }}
+                  className="relative group h-full"
                 >
                   <div
+                    className="grid w-full h-full"
                     style={{
                       transformStyle: 'preserve-3d',
                       transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease',
                       transform: flipped[i] ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                      position: 'relative',
-                      width: '100%',
-                      height: '100%',
-                      minHeight: '260px',
                     }}
                   >
                     {/* Front */}
                     <div
-                      style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
-                      className="absolute inset-0 rounded-[2rem] bg-black border border-white/10 group-hover:border-white/30 transition-colors duration-500 p-10 flex flex-col items-center justify-center shadow-[0_20px_60px_rgba(0,0,0,0.15)] group-hover:shadow-[0_30px_80px_rgba(0,0,0,0.3)] overflow-hidden"
+                      style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', gridArea: '1/1' }}
+                      className="relative min-h-[260px] rounded-[2rem] bg-black border border-white/10 group-hover:border-white/30 transition-colors duration-500 p-6 md:p-10 flex flex-col items-center justify-center shadow-[0_20px_60px_rgba(0,0,0,0.15)] group-hover:shadow-[0_30px_80px_rgba(0,0,0,0.3)] overflow-hidden"
                     >
                       {/* Dark color grade matching Industries */}
                       <div className="absolute inset-0 bg-gradient-to-b from-neutral-900 to-black opacity-90 group-hover:from-neutral-800 transition-colors duration-500" />
@@ -131,8 +128,9 @@ export default function About() {
                         backfaceVisibility: 'hidden',
                         WebkitBackfaceVisibility: 'hidden',
                         transform: 'rotateY(180deg)',
+                        gridArea: '1/1',
                       }}
-                      className="absolute inset-0 rounded-[2rem] bg-black border border-white/10 group-hover:border-white/30 transition-colors duration-500 p-10 flex flex-col justify-center shadow-[0_20px_60px_rgba(0,0,0,0.15)] group-hover:shadow-[0_30px_80px_rgba(0,0,0,0.3)] overflow-hidden"
+                      className="relative min-h-[260px] rounded-[2rem] bg-black border border-white/10 group-hover:border-white/30 transition-colors duration-500 p-6 md:p-10 flex flex-col justify-center shadow-[0_20px_60px_rgba(0,0,0,0.15)] group-hover:shadow-[0_30px_80px_rgba(0,0,0,0.3)] overflow-hidden"
                     >
                       {/* Dark color grade matching Industries */}
                       <div className="absolute inset-0 bg-gradient-to-b from-neutral-900 to-black opacity-90 group-hover:from-neutral-800 transition-colors duration-500" />
@@ -162,9 +160,9 @@ export default function About() {
       </section>
 
       {/* Vision & Mission */}
-      <section className="py-24 px-6">
+      <section className="py-14 px-6">
         <div className="container mx-auto max-w-7xl">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="space-y-8 mb-12">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="space-y-8 mb-12">
             <h2 className="heading-section text-gradient">Vision &amp; Mission</h2>
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -172,7 +170,7 @@ export default function About() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
               whileHover={{ y: -8, scale: 1.01, boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.15)' }}
               transition={{ duration: 0.4 }}
               className="rounded-2xl border border-black/[0.08] bg-white/70 backdrop-blur-sm shadow-sm overflow-hidden flex flex-col hover:border-black/20 hover:bg-white transition-colors duration-300 cursor-pointer"
@@ -206,7 +204,7 @@ export default function About() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
               whileHover={{ y: -8, scale: 1.01, boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.15)' }}
               transition={{ duration: 0.4, delay: 0.1 }}
               className="rounded-2xl border border-black/[0.08] bg-white/70 backdrop-blur-sm shadow-sm overflow-hidden flex flex-col hover:border-black/20 hover:bg-white transition-colors duration-300 cursor-pointer"
@@ -245,9 +243,9 @@ export default function About() {
       </section>
 
       {/* Organizational Structure */}
-      <section className="py-24 px-6">
+      <section className="py-14 px-6">
         <div className="container mx-auto max-w-7xl">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="space-y-8 mb-12">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="space-y-8 mb-12">
             <h2 className="heading-section text-gradient">Organizational Structure</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -271,36 +269,33 @@ export default function About() {
                 key={idx}
                 initial={card.anim}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 onClick={() => toggleFlip(10 + idx)}
                 onMouseEnter={() => setHovered(prev => ({ ...prev, [10 + idx]: true }))}
                 onMouseLeave={() => setHovered(prev => ({ ...prev, [10 + idx]: false }))}
                 style={{
                   perspective: '1000px',
                   cursor: 'pointer',
-                  minHeight: '320px',
                   transform: hovered[10 + idx] ? 'translateY(-6px)' : 'translateY(0px)',
                   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                   borderRadius: '1rem',
                   boxShadow: hovered[10 + idx] ? '0 20px 40px rgba(0,0,0,0.12)' : '0 1px 4px rgba(0,0,0,0.06)',
                 }}
-                className="relative"
+                className="relative h-full"
               >
                 <div
+                  className="grid w-full h-full"
                   style={{
                     transformStyle: 'preserve-3d',
                     transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                     transform: flipped[10 + idx] ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                    position: 'relative',
-                    width: '100%',
-                    height: '100%',
-                    minHeight: '320px',
                   }}
                 >
                   {/* Front — icon + title + hint */}
                   <div
-                    style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
-                    className="absolute inset-0 glass-panel p-10 flex flex-col items-center justify-center"
+                    style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', gridArea: '1/1' }}
+                    className="relative min-h-[320px] glass-panel p-6 md:p-10 flex flex-col items-center justify-center"
                   >
                     <div
                       className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-black/10 transition-all duration-400"
@@ -320,8 +315,9 @@ export default function About() {
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
                       transform: 'rotateY(180deg)',
+                      gridArea: '1/1',
                     }}
-                    className="absolute inset-0 glass-panel p-10 flex flex-col justify-center"
+                    className="relative min-h-[320px] glass-panel p-6 md:p-10 flex flex-col justify-center"
                   >
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-10 h-10 rounded-xl bg-black flex items-center justify-center shadow-sm">
@@ -349,9 +345,9 @@ export default function About() {
       </section>
 
       {/* Strategic Direction */}
-      <section className="py-24 px-6">
+      <section className="py-14 px-6">
         <div className="container mx-auto max-w-7xl">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="space-y-8 mb-12">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="space-y-8 mb-12">
             <h2 className="heading-section text-gradient">Strategic Direction</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -364,8 +360,8 @@ export default function About() {
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="group relative overflow-hidden rounded-2xl border border-black/[0.08] bg-white/60 backdrop-blur-sm shadow-sm"
               >
                 {/* Photo — 0 height by default, expands down on hover */}
@@ -391,10 +387,10 @@ export default function About() {
       </section>
 
       {/* Closing */}
-      <section className="py-32 px-6 relative overflow-x-clip">
+      <section className="py-20 px-6 relative overflow-x-clip">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[120px]" />
         <div className="container mx-auto max-w-4xl text-center relative z-10">
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-body-premium text-neutral-700 leading-relaxed text-center mb-10 max-w-4xl mx-auto">
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="text-body-premium text-neutral-700 leading-relaxed text-center mb-10 max-w-4xl mx-auto">
             Stibe Labs Pvt Ltd is building the future of intelligent enterprises through integrated technology ecosystems, AI-driven automation, and scalable SaaS platforms designed for multi-industry transformation.
           </motion.p>
           <Link href="/contact" className="inline-block px-8 py-4 rounded-full bg-accent text-white font-semibold hover:shadow-glow-lg transition-all">

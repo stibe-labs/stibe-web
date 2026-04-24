@@ -33,7 +33,7 @@ export default function PlatformFeature({
   icon: Icon
 }: PlatformFeatureProps) {
   return (
-    <section id={id} className="py-24 md:py-32 px-6 overflow-x-clip scroll-mt-32">
+    <section id={id} className="py-14 md:py-20 px-6 overflow-x-clip scroll-mt-32">
       <div className="container mx-auto max-w-7xl">
         <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 lg:gap-24`}>
           
@@ -41,7 +41,7 @@ export default function PlatformFeature({
           <motion.div
             initial={{ opacity: 0, x: reverse ? 50 : -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="flex-1 text-left"
           >
@@ -83,7 +83,7 @@ export default function PlatformFeature({
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
             className="flex-1 w-full"
           >

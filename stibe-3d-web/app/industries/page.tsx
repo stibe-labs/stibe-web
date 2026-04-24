@@ -57,19 +57,19 @@ function IndustryCard({ ind }: { ind: any }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["2%", "-2%"]);
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [30, 16, 5]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["1%", "-1%"]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [14, 7, 1]);
 
   return (
-    <div ref={ref} className="relative min-h-[110vh] w-full flex items-center justify-center px-4 sm:px-6">
-      <div className="relative w-full max-w-5xl min-h-[75vh] sm:h-[75vh] flex flex-col items-center justify-center sm:justify-end pb-0 sm:pb-20 pt-10 sm:pt-0">
+    <div ref={ref} className="relative min-h-[80vh] sm:min-h-[110vh] w-full flex items-center justify-center px-4 sm:px-6">
+      <div className="relative w-full max-w-5xl min-h-[62vh] sm:h-[75vh] flex flex-col items-center justify-center sm:justify-end pb-0 sm:pb-20 pt-6 sm:pt-0">
         
         {/* 3D Background Card Layer */}
-        <motion.div style={{ perspective: '1200px', y: bgY }} className="absolute inset-0 flex items-end justify-center z-0">
+        <motion.div style={{ perspective: '900px', y: bgY }} className="absolute inset-0 flex items-end justify-center z-0">
           <motion.div 
             style={{ rotateX, scale: 0.95 }}
-            className="w-full h-full bg-black rounded-[2rem] sm:rounded-[4rem] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-white/10 origin-bottom"
+            className="w-full h-full bg-black rounded-[1.5rem] sm:rounded-[4rem] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-white/10 origin-bottom"
           >
              {/* Card Material and Lighting */}
              <div className="absolute inset-0 bg-gradient-to-b from-neutral-900 to-black opacity-90" />
@@ -79,20 +79,20 @@ function IndustryCard({ ind }: { ind: any }) {
         </motion.div>
 
         {/* Flat Text Layer overlaying the 3D card */}
-        <motion.div style={{ y: textY }} className="relative z-10 w-full px-5 sm:px-12 flex flex-col items-center text-center">
-          <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-2xl backdrop-blur-xl mb-4 sm:mb-6 flex-shrink-0">
-            <ind.icon size={26} className="text-white drop-shadow-md sm:hidden" />
+        <motion.div style={{ y: textY }} className="relative z-10 w-full px-8 sm:px-12 flex flex-col items-center text-center">
+          <div className="w-12 h-12 sm:w-20 sm:h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-2xl backdrop-blur-xl mb-3 sm:mb-6 flex-shrink-0">
+            <ind.icon size={22} className="text-white drop-shadow-md sm:hidden" />
             <ind.icon size={36} className="text-white drop-shadow-md hidden sm:block" />
           </div>
-          <h3 className="text-2xl sm:text-4xl md:text-5xl font-black mb-3 sm:mb-6 text-white tracking-widest uppercase drop-shadow-2xl leading-tight">
+          <h3 className="text-xl sm:text-4xl md:text-5xl font-black mb-2 sm:mb-6 text-white tracking-widest uppercase drop-shadow-2xl leading-tight">
             {ind.title}
           </h3>
-          <p className="text-neutral-400 text-sm sm:text-xl leading-relaxed mb-5 sm:mb-10 font-medium max-w-2xl mx-auto drop-shadow-md">
+          <p className="text-neutral-400 text-xs sm:text-xl leading-relaxed mb-4 sm:mb-10 font-medium max-w-2xl mx-auto drop-shadow-md">
             {ind.desc}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-3">
             {ind.tags.map((tag: string) => (
-              <span key={tag} className="px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-white/10 border border-white/10 text-white text-[10px] sm:text-sm font-bold tracking-wider uppercase backdrop-blur-md shadow-lg whitespace-nowrap">
+              <span key={tag} className="px-2.5 py-1 sm:px-5 sm:py-2.5 rounded-full bg-white/10 border border-white/10 text-white text-[9px] sm:text-sm font-bold tracking-wider uppercase backdrop-blur-md shadow-lg whitespace-nowrap">
                 {tag}
               </span>
             ))}
@@ -107,7 +107,7 @@ export default function Industries() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="relative pt-32 pb-24 px-6 overflow-x-clip min-h-[50vh] flex items-center">
+      <section className="relative pt-24 pb-14 px-6 overflow-x-clip min-h-[50vh] flex items-center">
         <div className="absolute inset-0 hero-grid" />
         <div className="absolute inset-0 radial-fade" />
         <div className="absolute bottom-1/3 left-1/3 w-[400px] h-[400px] bg-accent/8 rounded-full blur-[100px]" />
@@ -134,7 +134,7 @@ export default function Industries() {
           <motion.h2 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 1 }}
             className="text-[14vw] font-black uppercase text-black/[0.04] tracking-tighter whitespace-nowrap leading-none select-none"
           >
@@ -145,7 +145,7 @@ export default function Industries() {
         {/* Cards Wrapper */}
         <div className="relative z-10 max-w-5xl mx-auto -mt-[100vh] px-6">
           {/* Initial padding so the text is visible initially before cards arrive */}
-          <div className="h-[40vh] w-full" />
+          <div className="h-[2vh] w-full" />
           
           {industries.map((ind, i) => (
             <IndustryCard key={ind.title} ind={ind} />
@@ -157,10 +157,10 @@ export default function Industries() {
       <section className="py-[var(--section-padding)] px-6 relative overflow-x-clip">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-black/5 rounded-full blur-[120px]" />
         <div className="container mx-auto max-w-4xl text-center relative z-10">
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="heading-section mb-6 text-black">
+          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="heading-section mb-6 text-black">
             Your Industry, Our Expertise
           </motion.h2>
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-body-premium text-neutral-600 mb-10 max-w-2xl mx-auto">
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ delay: 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="text-body-premium text-neutral-600 mb-10 max-w-2xl mx-auto">
             Let us build the digital infrastructure your industry demands.
           </motion.p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-10 py-5 rounded-full bg-black text-white font-semibold hover:bg-neutral-800 transition-all shadow-lg hover:shadow-black/20">

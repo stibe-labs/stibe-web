@@ -21,7 +21,7 @@
     --font-nav: clamp(0.9rem, 1vw, 14.5px);
 
     /* ANTIGRAVITY SPACING (RESPONSIVE) */
-    --section-padding: clamp(80px, 8vw, 180px);
+    --section-padding: clamp(48px, 5vw, 100px);
     --element-gap: clamp(24px, 4vw, 48px);
   }
 
@@ -108,30 +108,40 @@
     box-shadow: 
       0 10px 40px -10px rgba(0, 0, 0, 0.02),
       inset 0 0 0 1.5px rgba(255, 255, 255, 0.4);
-    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Only animate compositor-friendly properties */
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.35s ease,
+                border-color 0.35s ease;
     isolation: isolate;
   }
 
-  .glass-card:hover {
-    background: rgba(255, 255, 255, 0.9);
-    border-color: rgba(0, 0, 0, 0.12);
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 
-      0 30px 60px -12px rgba(0, 0, 0, 0.08),
-      inset 0 0 0 1.5px rgba(255, 255, 255, 0.6);
+  @media (hover: hover) {
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(0, 0, 0, 0.12);
+      transform: translate3d(0, -12px, 0) scale(1.02);
+      box-shadow: 
+        0 30px 60px -12px rgba(0, 0, 0, 0.08),
+        inset 0 0 0 1.5px rgba(255, 255, 255, 0.6);
+    }
   }
 
   .glow-button {
     background: #000000;
     color: #ffffff;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.3s ease;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
 
-  .glow-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-    background: #111111;
+  @media (hover: hover) {
+    .glow-button:hover {
+      transform: translate3d(0, -2px, 0);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      background: #111111;
+    }
   }
 
   .text-gradient {
@@ -211,22 +221,69 @@
   
   .animate-float {
     animation: float 6s ease-in-out infinite;
+    will-change: transform;
   }
 
   .animate-float-delayed {
     animation: float 6s ease-in-out 2s infinite;
+    will-change: transform;
   }
 
   .animate-float-slow {
     animation: float-slow 8s ease-in-out infinite;
+    will-change: transform;
   }
 
   .animate-pulse-glow {
     animation: pulse-glow 3s ease-in-out infinite;
+    will-change: opacity;
   }
 
   .animate-antigravity {
     animation: antigravity 12s ease-in-out infinite;
+    will-change: transform;
+  }
+}
+
+/* ── MOBILE / TOUCH OPTIMIZATIONS ───────────────────────────── */
+@media (max-width: 768px) {
+  /* Shorter, cheaper interactions on touch devices */
+  .glass-card {
+    transition-duration: 0.3s;
+  }
+  /* Disable heavy continuous float on antigravity hero backgrounds */
+  .animate-antigravity {
+    animation-duration: 18s;
+  }
+}
+
+/* Touch-only devices: disable hover-triggered transforms that feel stuck */
+@media (hover: none) {
+  .glass-card:hover {
+    transform: none;
+  }
+}
+
+/* ── REDUCED MOTION ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-float,
+  .animate-float-delayed,
+  .animate-float-slow,
+  .animate-pulse-glow,
+  .animate-antigravity,
+  .cursor-blink {
+    animation: none !important;
   }
 }
 
@@ -244,8 +301,8 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; filter: blur(0px); }
-  50% { opacity: 0.8; filter: blur(2px); }
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
 }
 
 @keyframes antigravity {

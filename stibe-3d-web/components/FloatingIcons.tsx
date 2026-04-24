@@ -44,14 +44,27 @@ function buildIcons(count: number): FloatingIcon[] {
 
 export default function FloatingIcons({ count = 22 }: { count?: number }) {
   const [mounted, setMounted] = useState(false);
+  const [reduced, setReduced] = useState(false);
+  const [effectiveCount, setEffectiveCount] = useState(count);
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReduced(mq.matches);
+    const onChange = () => setReduced(mq.matches);
+    mq.addEventListener?.('change', onChange);
+
+    // Halve count on narrow viewports to cut concurrent animations
+    const isNarrow = window.innerWidth < 768;
+    setEffectiveCount(isNarrow ? Math.max(6, Math.floor(count / 2)) : count);
+
+    return () => mq.removeEventListener?.('change', onChange);
+  }, [count]);
 
   if (!mounted) return null;
 
-  const icons = buildIcons(count);
+  const icons = buildIcons(effectiveCount);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -64,15 +77,20 @@ export default function FloatingIcons({ count = 22 }: { count?: number }) {
             top: `${icon.y}%`,
             fontSize: `${icon.size}px`,
             opacity: icon.opacity,
+            willChange: 'transform',
           }}
-          animate={{
-            y: [0, -30, -10, -40, -15, -35, -5, 0],
-            x: [0, 15, -10, 5, -20, 10, -5, 0],
-            rotate: [0, 5, -3, 8, -5, 3, -2, 0],
-          }}
+          animate={
+            reduced
+              ? undefined
+              : {
+                  y: [0, -30, -10, -40, -15, -35, -5, 0],
+                  x: [0, 15, -10, 5, -20, 10, -5, 0],
+                  rotate: [0, 5, -3, 8, -5, 3, -2, 0],
+                }
+          }
           transition={{
             duration: icon.duration,
-            repeat: Infinity,
+            repeat: reduced ? 0 : Infinity,
             ease: 'easeInOut',
             delay: icon.delay,
           }}

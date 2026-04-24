@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
@@ -24,9 +24,29 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const navBarRef = useRef<HTMLDivElement | null>(null);
+  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
+
+  // Measure active link position (x-axis only) whenever route changes
+  useEffect(() => {
+    const activeIdx = navLinks.findIndex((l) => l.path === pathname);
+    const linkEl = linkRefs.current[activeIdx];
+    const navEl = navBarRef.current;
+    if (!linkEl || !navEl) return;
+
+    const navRect = navEl.getBoundingClientRect();
+    const linkRect = linkEl.getBoundingClientRect();
+    setIndicatorStyle({
+      left: linkRect.left - navRect.left,
+      width: linkRect.width,
+      opacity: 1,
+    });
+  }, [pathname]);
 
   return (
     <motion.header
@@ -34,7 +54,7 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={clsx(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+        'fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300',
         scrolled
           ? 'bg-white/60 backdrop-blur-2xl border-b border-white/20 saturate-[1.8]'
           : 'bg-transparent border-b border-transparent'
@@ -43,17 +63,27 @@ export default function Navbar() {
       <nav className="container mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="relative z-50 flex items-center group">
-          <Image src="/logo.png" alt="Stibe Labs Logo" width={320} height={80} className="w-auto h-16 md:h-20 object-contain" priority />
+          <Image src="/logo.png" alt="Stibe Labs Logo" width={400} height={100} className="w-auto h-20 md:h-28 object-contain" priority />
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-1 bg-white/30 backdrop-blur-xl border border-white/40 p-1 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.04)]">
-          {navLinks.map((link) => {
+        <div
+          className="hidden md:flex items-center gap-1 bg-white/30 backdrop-blur-xl border border-white/40 p-1 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.04)] relative"
+          ref={(el) => { navBarRef.current = el; }}
+        >
+          {/* Horizontal-only sliding indicator — single persistent element */}
+          <motion.div
+            className="absolute top-1 bottom-1 bg-black rounded-full pointer-events-none"
+            animate={indicatorStyle}
+            transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
+          />
+          {navLinks.map((link, i) => {
             const isActive = pathname === link.path;
             return (
               <Link
                 key={link.name}
                 href={link.path}
+                ref={(el) => { linkRefs.current[i] = el; }}
                 className="relative px-4 py-2 rounded-full text-sm font-medium transition-colors"
               >
                 <span className={clsx(
@@ -62,13 +92,6 @@ export default function Navbar() {
                 )}>
                   {link.name}
                 </span>
-                {isActive && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute inset-0 bg-black rounded-full"
-                    transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
-                  />
-                )}
               </Link>
             );
           })}

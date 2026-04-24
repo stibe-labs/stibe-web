@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 
 export default function CinematicVideoSection() {
   return (
-    <section className="py-24 md:py-32 px-0 overflow-x-clip bg-white flex justify-center">
+    <section className="py-14 md:py-20 px-0 overflow-x-clip bg-white flex justify-center">
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         className="relative w-[95vw] aspect-[21/9] md:aspect-[16/7] rounded-[40px] bg-black overflow-hidden shadow-2xl border-[8px] md:border-[12px] border-black group"
       >
@@ -18,7 +18,7 @@ export default function CinematicVideoSection() {
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         >
           <source src="/kling.mp4" type="video/mp4" />
         </video>

@@ -120,13 +120,13 @@ function SolutionVideoShowcase() {
   const Icon = solutionVideos[active].icon;
 
   return (
-    <section className="py-24 px-6 relative overflow-x-clip">
+    <section className="py-14 px-6 relative overflow-x-clip">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-accent/5 rounded-full blur-[160px] pointer-events-none" />
       <div className="container mx-auto max-w-7xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={{ once: true, amount: 0.2, margin: '-60px' }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           className="mb-14"
         >
@@ -244,7 +244,7 @@ export default function Solutions() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="relative pt-32 pb-24 px-6 overflow-x-clip min-h-[50vh] flex items-center">
+      <section className="relative pt-24 pb-14 px-6 overflow-x-clip min-h-[50vh] flex items-center">
         <div className="absolute inset-0 hero-grid" />
         <div className="absolute inset-0 radial-fade" />
         <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-accent/8 rounded-full blur-[100px]" />
@@ -265,13 +265,13 @@ export default function Solutions() {
       </section>
 
       {/* Video Section */}
-      <section className="py-20 px-6 relative overflow-x-clip">
+      <section className="py-14 px-6 relative overflow-x-clip">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent/6 rounded-full blur-[140px] pointer-events-none" />
         <div className="container mx-auto max-w-7xl relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.96, y: 32 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
+            viewport={{ once: true, amount: 0.2, margin: '-60px' }}
             transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: 0.1 }}
             className="relative rounded-3xl overflow-hidden shadow-2xl border border-black/8 bg-black"
             style={{ aspectRatio: '16 / 9' }}
@@ -301,7 +301,7 @@ export default function Solutions() {
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
+              viewport={{ once: true, amount: 0.2, margin: '-80px' }}
               className="glass-card p-8 md:p-12 group"
             >
               <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
@@ -309,7 +309,7 @@ export default function Solutions() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ delay: i * 0.08 + 0.2, duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                     className="w-16 h-16 rounded-2xl bg-black/5 border border-black/10 flex items-center justify-center mb-8 group-hover:bg-black transition-all duration-500 shadow-sm"
                   >
@@ -330,7 +330,7 @@ export default function Solutions() {
                         variants={featureVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, margin: '-40px' }}
+                        viewport={{ once: true, amount: 0.2, margin: '-40px' }}
                         className="text-neutral-500 text-base flex items-center gap-4 py-3 border-b border-black/[0.04] last:border-b-0 group-hover:text-black transition-colors"
                       >
                         <ChevronRight size={16} className="text-black/20 flex-shrink-0" />{f}
@@ -348,10 +348,10 @@ export default function Solutions() {
       <SolutionVideoShowcase />
 
       {/* Closing */}
-      <section className="py-32 px-6 relative overflow-x-clip">
+      <section className="py-20 px-6 relative overflow-x-clip">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[120px]" />
         <div className="container mx-auto max-w-7xl text-center relative z-10">
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl md:text-3xl text-neutral-700 leading-relaxed font-medium tracking-tight mb-10">
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="text-2xl md:text-3xl text-neutral-700 leading-relaxed font-medium tracking-tight mb-10">
             Stibe Labs integrates technology, automation, growth, and branding into a unified ecosystem.
           </motion.p>
           <Link href="/contact" className="inline-block px-8 py-4 rounded-full bg-accent text-white font-semibold hover:shadow-glow-lg transition-all">

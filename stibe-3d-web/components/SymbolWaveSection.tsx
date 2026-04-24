@@ -21,11 +21,29 @@ export default function SymbolWaveSection() {
   const displayIcons = [...antigravityIcons, ...antigravityIcons, ...antigravityIcons, ...antigravityIcons];
 
   return (
-    <section className="relative py-32 md:py-40 overflow-x-clip bg-[#F8F9FC]">
+    <section className="relative py-20 md:py-24 overflow-x-clip bg-[#F8F9FC]">
+      {/* Keyframes + per-icon delay are inlined so we avoid 48 concurrent JS-driven animations */}
+      <style jsx>{`
+        @keyframes sw-float {
+          0%, 100% { transform: translate3d(0, 0, 0); }
+          25% { transform: translate3d(0, -32px, 0); }
+          50% { transform: translate3d(0, 0, 0); }
+          75% { transform: translate3d(0, 32px, 0); }
+        }
+        .sw-icon {
+          animation: sw-float 6s ease-in-out infinite;
+          will-change: transform;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .sw-icon { animation: none; }
+        }
+      `}</style>
+
       {/* 1:1 REPLICA OF THE SYMBOL WAVE */}
       <div className="relative mb-24 h-48 flex items-center">
         <motion.div 
           className="flex gap-[24px] items-center whitespace-nowrap px-4"
+          style={{ willChange: 'transform' }}
           animate={{ x: [0, -1000] }}
           transition={{ 
             duration: 25, 
@@ -34,21 +52,10 @@ export default function SymbolWaveSection() {
           }}
         >
           {displayIcons.map((icon, idx) => (
-            <motion.div
+            <div
               key={idx}
-              className="flex-shrink-0"
-              style={{
-                y: 0,
-              }}
-              animate={{
-                y: [0, -32, 0, 32, 0]
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: idx * 0.4
-              }}
+              className="sw-icon flex-shrink-0"
+              style={{ animationDelay: `${idx * 0.4}s` }}
             >
               <div className="w-[64px] h-[64px] rounded-full bg-[#EFF2F7] flex items-center justify-center text-[#121317]">
                 <div 
@@ -56,7 +63,7 @@ export default function SymbolWaveSection() {
                   dangerouslySetInnerHTML={{ __html: icon.svg }}
                 />
               </div>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </div>
@@ -67,7 +74,7 @@ export default function SymbolWaveSection() {
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="text-[48px] md:text-[88px] font-[450] tracking-[-0.03em] leading-[1.05] text-[#121317]"
           >
@@ -77,7 +84,7 @@ export default function SymbolWaveSection() {
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="text-[48px] md:text-[88px] font-[450] tracking-[-0.03em] leading-[1.05] text-[#121317]"
           >
@@ -87,7 +94,7 @@ export default function SymbolWaveSection() {
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="text-[48px] md:text-[88px] font-[450] tracking-[-0.03em] leading-[1.05] text-[#121317]"
           >
