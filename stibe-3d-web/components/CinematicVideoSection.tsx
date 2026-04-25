@@ -25,10 +25,10 @@ export default function CinematicVideoSection() {
 
         {/* Premium Glass Overlays & Subtle Glow */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
-        
+
         {/* Internal Bezel Reflection/Ring */}
         <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[28px] md:rounded-[28px]" />
-        
+
         {/* Subtle Corner Glows */}
         <div className="absolute -top-24 -left-24 w-64 h-64 bg-accent/20 rounded-full blur-[100px] pointer-events-none opacity-50" />
         <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none opacity-30" />
