@@ -217,7 +217,7 @@ export default function Home() {
           </motion.h1>
 
           <motion.p variants={fadeUp} className="text-body-premium text-neutral-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-            AI-powered software, automation platforms, and SaaS systems designed for scalable, performance-driven enterprises.
+            AI-powered software, automation platforms, and SaaS systems designed for scalable, performance-driven enterprises. 🚀 Latest Update: April 25, 2026
           </motion.p>
 
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12">
