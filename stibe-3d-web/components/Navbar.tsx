@@ -60,10 +60,10 @@ export default function Navbar() {
           : 'bg-transparent border-b border-transparent'
       )}
     >
-      <nav className="container mx-auto px-6 h-20 flex items-center justify-between">
+      <nav className="mx-auto px-2 h-20 flex items-center justify-between w-full">
         {/* Logo */}
-        <Link href="/" className="relative z-50 flex items-center group">
-          <Image src="/logo.png" alt="Stibe Labs Logo" width={400} height={100} className="w-auto h-20 md:h-28 object-contain" priority />
+        <Link href="/" className="relative z-50 flex items-center group ml-2 md:ml-8 pl-0">
+          <Image src="/logo.png" alt="Stibe Labs Logo" width={280} height={70} className="w-auto h-14 md:h-[4.5rem] object-contain" priority />
         </Link>
 
         {/* Desktop Nav */}
@@ -98,7 +98,7 @@ export default function Navbar() {
         </div>
 
         {/* CTA */}
-        <div className="hidden md:block">
+        <div className="hidden md:block mr-8 pr-0">
           <Link
             href="/contact"
             className="glow-button px-5 py-2.5 rounded-full bg-accent text-white font-semibold text-sm hover:bg-accent/90 transition-all shadow-glow"

@@ -52,12 +52,21 @@ export default function Footer() {
           </Link>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-16">
-          <div className="col-span-2 md:col-span-4 lg:col-span-1">
-            <Link href="/" className="flex items-center mb-6">
-              <Image src="/logo.png" alt="Stibe Labs Logo" width={460} height={120} className="w-auto h-32 md:h-48 object-contain" />
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 mb-16 items-start">
+          <div className="col-span-2 md:col-span-4 lg:col-span-2 flex flex-col">
+            <Link href="/" className="block">
+              <div className="overflow-hidden" style={{ marginLeft: '-12px', marginTop: '-14px', marginBottom: '-18px', marginRight: '-30px' }}>
+                <Image
+                  src="/logo.png"
+                  alt="Stibe Labs Logo"
+                  width={320}
+                  height={90}
+                  className="object-contain w-full max-w-[240px]"
+                  priority
+                />
+              </div>
             </Link>
-            <p className="text-neutral-500 text-sm leading-relaxed max-w-xs">
+            <p className="text-neutral-500 text-sm leading-relaxed max-w-[360px] mt-5">
               Engineering Intelligent Digital Ecosystems. AI-powered software, automation platforms, and SaaS systems.
             </p>
           </div>
