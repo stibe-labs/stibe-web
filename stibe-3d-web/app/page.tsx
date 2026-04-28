@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronRight, Layers, Box, Cpu, Network, Sparkles, Megaphone, ArrowRight, Zap, Globe, Shield, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRef, useState, useEffect } from 'react';
 import AntigravityFeature from '../components/AntigravityFeature';
 import ParticlesBackground from '../components/ParticlesBackground';
@@ -503,6 +504,50 @@ export default function Home() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* OUR PARTNERS */}
+      <section className="py-[var(--section-padding)] px-6 overflow-hidden">
+        <div className="container mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center mb-14"
+          >
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-4">Trusted by</span>
+            <h2 className="heading-section text-gradient">Our Partners</h2>
+          </motion.div>
+
+          <div className="relative w-full overflow-hidden">
+            {/* Fade edges */}
+            <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+            <motion.div
+              className="flex gap-16 items-center"
+              animate={{ x: ['0%', '-50%'] }}
+              transition={{ repeat: Infinity, ease: 'linear', duration: 18 }}
+              style={{ width: 'max-content' }}
+            >
+              {[...Array(10)].map((_, i) => (
+                <div
+                  key={i}
+                  className="flex-shrink-0 w-36 h-16 flex items-center justify-center opacity-40 grayscale hover:opacity-80 hover:grayscale-0 transition-all duration-400"
+                >
+                  <Image
+                    src="/logo.png"
+                    alt={`Partner ${(i % 5) + 1}`}
+                    width={120}
+                    height={48}
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>

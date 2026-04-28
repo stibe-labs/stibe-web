@@ -8,12 +8,13 @@ const footerLinks = {
   Company: [
     { name: 'About Us', path: '/about' },
     { name: 'Business Model', path: '/business-model' },
+    { name: 'Careers', path: '/careers' },
     { name: 'Contact', path: '/contact' },
   ],
   Solutions: [
-    { name: 'Enterprise Software', path: '/solutions' },
+    { name: 'Enterprise Software', path: '/solutions/software' },
     { name: 'AI & Automation', path: '/solutions' },
-    { name: 'Digital Growth', path: '/solutions' },
+    { name: 'Digital Growth', path: '/solutions/digital-marketing' },
   ],
   Platforms: [
     { name: 'Stibe CRM', path: '/platforms' },

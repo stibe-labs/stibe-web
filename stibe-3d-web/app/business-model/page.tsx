@@ -49,7 +49,7 @@ export default function BusinessModel() {
         <div className="absolute inset-0 radial-fade" />
         <div className="absolute top-1/3 right-1/3 w-[400px] h-[400px] bg-accent/8 rounded-full blur-[100px]" />
         <FloatingIcons count={8} />
-        <div className="container mx-auto max-w-5xl relative z-10">
+        <div className="container mx-auto max-w-7xl relative z-10">
           <motion.div initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.1 } } }}>
             <motion.span variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/5 border border-black/[0.08] text-neutral-700 text-sm mb-6">
               <CreditCard size={14} /> Revenue Model
@@ -66,8 +66,8 @@ export default function BusinessModel() {
 
       {/* Revenue Streams */}
       <section className="py-[var(--section-padding)] px-6">
-        <div className="container mx-auto max-w-6xl">
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="heading-section mb-16 text-center text-gradient">
+        <div className="container mx-auto max-w-7xl">
+          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="heading-section mb-16 text-gradient">
             Revenue Streams
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -81,7 +81,7 @@ export default function BusinessModel() {
                 className="glass-card p-8 group flex flex-col"
               >
                 <div className="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-6 group-hover:bg-accent group-hover:shadow-glow transition-all duration-500">
-                  <stream.icon size={24} className="text-accent group-hover:text-black transition-colors" />
+                  <stream.icon size={24} className="text-accent group-hover:text-white transition-colors" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 text-black">{stream.title}</h3>
                 <ul className="space-y-2 mb-6 flex-grow">
@@ -102,7 +102,7 @@ export default function BusinessModel() {
 
       {/* How We Deliver Value */}
       <section className="py-24 px-6">
-        <div className="container mx-auto max-w-5xl">
+        <div className="container mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }} className="glass-panel p-10 md:p-16 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-purple-500/5 pointer-events-none" />
             <h3 className="heading-section mb-8 text-black relative z-10 text-center">How We Deliver Value</h3>
