@@ -1,25 +1,23 @@
 #!/bin/bash
-# Stibe Web - Deploy to VPS
+# Stibe Web - Deploy to VPS via GitHub
 # Usage: ./deploy.sh
 
 set -e
 
 SERVER="root@187.127.147.191"
-REMOTE_DIR="/var/www/stibe-web"
+REMOTE_REPO="/var/www/stibe-repo"
+REMOTE_APP="$REMOTE_REPO/stibe-3d-web"
 
-echo "🔨 Building Next.js project..."
-npm run build
+echo "📥 Pulling latest code from GitHub..."
+ssh "$SERVER" "cd $REMOTE_REPO && git pull origin main"
 
-echo "📦 Uploading files to server..."
-rsync -avz --delete \
-  --exclude 'node_modules' \
-  --exclude '.git' \
-  ./ "$SERVER:$REMOTE_DIR/"
+echo "📦 Installing dependencies on server..."
+ssh "$SERVER" "cd $REMOTE_APP && npm install"
 
-echo "📥 Installing dependencies on server..."
-ssh "$SERVER" "cd $REMOTE_DIR && npm install --omit=dev"
+echo "🔨 Building Next.js project on server..."
+ssh "$SERVER" "cd $REMOTE_APP && npm run build"
 
 echo "🔄 Restarting app..."
-ssh "$SERVER" "cd $REMOTE_DIR && PORT=3001 pm2 restart stibe-web --update-env"
+ssh "$SERVER" "cd $REMOTE_APP && PORT=3001 pm2 restart stibe-web --update-env"
 
 echo "✅ Deployed! Live at https://stibe.in"
