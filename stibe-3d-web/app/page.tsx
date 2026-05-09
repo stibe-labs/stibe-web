@@ -183,11 +183,36 @@ function HorizontalCapabilities({ targetRef }: { targetRef: React.RefObject<HTML
 export default function Home() {
   const capabilitiesRef = useRef<HTMLElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [visibleCards, setVisibleCards] = useState(3);
+
+  useEffect(() => {
+    const updateVisible = () => {
+      if (carouselRef.current) {
+        const firstCard = carouselRef.current.firstElementChild as HTMLElement;
+        if (firstCard) {
+          const cardWidth = firstCard.offsetWidth + 24;
+          const containerWidth = carouselRef.current.offsetWidth;
+          setVisibleCards(Math.max(1, Math.round(containerWidth / cardWidth)));
+        }
+      }
+    };
+    updateVisible();
+    window.addEventListener('resize', updateVisible);
+    return () => window.removeEventListener('resize', updateVisible);
+  }, []);
+
+  const maxCarouselIndex = Math.max(0, platforms.length - visibleCards);
 
   const scrollCarousel = (direction: 'left' | 'right') => {
+    const newIndex = direction === 'left'
+      ? Math.max(0, carouselIndex - 1)
+      : Math.min(maxCarouselIndex, carouselIndex + 1);
+    setCarouselIndex(newIndex);
     if (carouselRef.current) {
-      const scrollAmount = direction === 'left' ? -450 : 450;
-      carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      const firstCard = carouselRef.current.firstElementChild as HTMLElement;
+      const cardWidth = firstCard ? firstCard.offsetWidth + 24 : 450;
+      carouselRef.current.scrollTo({ left: newIndex * cardWidth, behavior: 'smooth' });
     }
   };
 
@@ -211,9 +236,9 @@ export default function Home() {
 
           <motion.h1 variants={fadeUp} className="heading-hero mb-8">
             <span className="text-black">Engineering </span>
-            <br className="hidden md:block" />
+            <br />
             <HeroTyping />
-            <br className="hidden md:block" />
+            <br />
             <span className="text-black"> Digital Ecosystems</span>
           </motion.h1>
 
@@ -361,10 +386,10 @@ export default function Home() {
             </motion.div>
           </div>
 
-          <div className="relative group/carousel">
+          <div className="relative">
             <div 
               ref={carouselRef}
-              className="flex gap-6 overflow-x-auto pb-12 no-scrollbar snap-x snap-mandatory"
+              className="flex gap-6 overflow-x-auto pb-4 no-scrollbar snap-x snap-mandatory"
               style={{ scrollbarWidth: 'none' }}
             >
               {platforms.map((p, i) => (
@@ -374,7 +399,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="min-w-[300px] md:min-w-[420px] snap-start"
+                  className="flex-shrink-0 w-[85vw] md:w-[calc((100%-3rem)/3)] snap-start"
                 >
                   <Link href={p.link} className="block group">
                     <div className="relative aspect-square bg-black rounded-[40px] overflow-hidden mb-8 transition-[transform,box-shadow] duration-500">
@@ -423,21 +448,31 @@ export default function Home() {
               ))}
             </div>
             
-            {/* Nav Arrows (Visual/Layout match) */}
-            <div className="absolute -bottom-4 left-0 flex items-center gap-4">
+            {/* Nav Arrows - centered */}
+            <div className="flex items-center justify-center gap-6 mt-8">
               <button 
                 onClick={() => scrollCarousel('left')}
-                className="w-10 h-10 rounded-full border border-neutral-100 flex items-center justify-center hover:bg-neutral-50 transition-colors"
+                disabled={carouselIndex === 0}
+                className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                  carouselIndex === 0
+                    ? 'border-neutral-200 text-neutral-300 cursor-not-allowed opacity-40'
+                    : 'border-neutral-300 text-neutral-600 hover:bg-black hover:border-black hover:text-white'
+                }`}
                 aria-label="Previous platform"
               >
-                <ChevronRight size={20} className="rotate-180 text-neutral-400" />
+                <ChevronRight size={20} className="rotate-180" />
               </button>
               <button 
                 onClick={() => scrollCarousel('right')}
-                className="w-10 h-10 rounded-full border border-neutral-100 flex items-center justify-center hover:bg-neutral-50 transition-colors"
+                disabled={carouselIndex >= maxCarouselIndex}
+                className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                  carouselIndex >= maxCarouselIndex
+                    ? 'border-neutral-200 text-neutral-300 cursor-not-allowed opacity-40'
+                    : 'bg-black border-black text-white hover:bg-neutral-800'
+                }`}
                 aria-label="Next platform"
               >
-                <ChevronRight size={20} className="text-black" />
+                <ChevronRight size={20} />
               </button>
             </div>
           </div>
@@ -533,20 +568,28 @@ export default function Home() {
               transition={{ repeat: Infinity, ease: 'linear', duration: 18 }}
               style={{ width: 'max-content' }}
             >
-              {[...Array(10)].map((_, i) => (
-                <div
-                  key={i}
-                  className="flex-shrink-0 w-36 h-16 flex items-center justify-center opacity-40 grayscale hover:opacity-80 hover:grayscale-0 transition-all duration-400"
-                >
-                  <Image
-                    src="/logo.png"
-                    alt={`Partner ${(i % 5) + 1}`}
-                    width={120}
-                    height={48}
-                    className="object-contain w-full h-full"
-                  />
-                </div>
-              ))}
+              {[...Array(2)].flatMap((_, set) =>
+                [
+                  { src: '/hna.webp', alt: 'HNA' },
+                  { src: '/hnc.webp', alt: 'HNC' },
+                  { src: '/poornasree.webp', alt: 'Poornasree' },
+                  { src: '/py-logo.webp', alt: 'PY' },
+                  { src: '/Zahari.webp', alt: 'Zahari' },
+                ].map((partner, i) => (
+                  <div
+                    key={`${set}-${i}`}
+                    className="flex-shrink-0 w-80 h-40 flex items-center justify-center opacity-60 grayscale hover:opacity-90 hover:grayscale-0 transition-all duration-400"
+                  >
+                    <Image
+                      src={partner.src}
+                      alt={partner.alt}
+                      width={300}
+                      height={140}
+                      className="object-contain w-full h-full"
+                    />
+                  </div>
+                ))
+              )}
             </motion.div>
           </div>
         </div>
