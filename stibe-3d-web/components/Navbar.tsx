@@ -215,12 +215,13 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-2xl border-b border-black/5 md:hidden"
+            initial={{ opacity: 0, scale: 0.95, y: -8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -8 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute top-full right-3 mt-1 w-52 bg-white/70 backdrop-blur-2xl border border-white/40 rounded-2xl shadow-xl shadow-black/10 md:hidden overflow-hidden"
           >
-            <div className="flex flex-col px-6 py-8 gap-2">
+            <div className="flex flex-col px-2 py-2 gap-0.5">
               {navLinks.map((link) => {
                 if (link.name === 'Solutions') {
                   return (
@@ -228,15 +229,15 @@ export default function Navbar() {
                       <button
                         onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
                         className={clsx(
-                          'w-full text-lg font-medium py-3 px-4 rounded-xl transition-colors flex items-center justify-between',
+                          'w-full text-sm font-medium py-2 px-3 rounded-xl transition-colors flex items-center justify-between',
                           pathname.startsWith('/solutions')
-                            ? 'text-black bg-black/5'
-                            : 'text-neutral-500 hover:text-black hover:bg-black/[0.03]'
+                            ? 'text-black bg-black/8'
+                            : 'text-neutral-600 hover:text-black hover:bg-black/[0.05]'
                         )}
                       >
                         Solutions
                         <ChevronDown
-                          size={18}
+                          size={13}
                           className={clsx('transition-transform duration-200', mobileSolutionsOpen && 'rotate-180')}
                         />
                       </button>
@@ -246,23 +247,23 @@ export default function Navbar() {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.25 }}
+                            transition={{ duration: 0.2 }}
                             className="overflow-hidden"
                           >
-                            <div className="ml-4 mt-1 flex flex-col gap-1 pb-2">
+                            <div className="ml-2 mt-0.5 flex flex-col gap-0.5 pb-1">
                               {solutionsDropdownItems.map((item) => (
                                 <Link
                                   key={item.path}
                                   href={item.path}
                                   onClick={() => { setMobileMenuOpen(false); setMobileSolutionsOpen(false); }}
                                   className={clsx(
-                                    'flex items-center gap-3 py-2.5 px-4 rounded-xl transition-colors text-base font-medium',
+                                    'flex items-center gap-2 py-1.5 px-3 rounded-lg transition-colors text-xs font-medium',
                                     pathname === item.path
-                                      ? 'text-black bg-black/5'
-                                      : 'text-neutral-500 hover:text-black hover:bg-black/[0.03]'
+                                      ? 'text-black bg-black/8'
+                                      : 'text-neutral-500 hover:text-black hover:bg-black/[0.05]'
                                   )}
                                 >
-                                  <item.icon size={16} className="flex-shrink-0" />
+                                  <item.icon size={13} className="flex-shrink-0" />
                                   {item.name}
                                 </Link>
                               ))}
@@ -280,10 +281,10 @@ export default function Navbar() {
                     href={link.path}
                     onClick={() => setMobileMenuOpen(false)}
                     className={clsx(
-                      'text-lg font-medium py-3 px-4 rounded-xl transition-colors',
+                      'text-sm font-medium py-2 px-3 rounded-xl transition-colors',
                       pathname === link.path
-                        ? 'text-black bg-black/5'
-                        : 'text-neutral-500 hover:text-black hover:bg-black/[0.03]'
+                        ? 'text-black bg-black/8'
+                        : 'text-neutral-600 hover:text-black hover:bg-black/[0.05]'
                     )}
                   >
                     {link.name}
@@ -293,7 +294,7 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="mt-4 px-6 py-3 rounded-xl bg-accent text-white text-center font-semibold"
+                className="mt-1 px-3 py-2 rounded-xl bg-accent text-white text-center font-semibold text-xs"
               >
                 Request Demo
               </Link>
