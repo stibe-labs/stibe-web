@@ -278,7 +278,7 @@ export default function Home() {
       <AntigravityFeature 
         title="Software Solutions"
         description="Robust, scalable, and fully integrated enterprise software systems designed to streamline business operations."
-        videoSrc="/agy-logo.mp4"
+        videoSrc="/software-solution-main.mp4"
       />
       
       <AntigravityFeature 
