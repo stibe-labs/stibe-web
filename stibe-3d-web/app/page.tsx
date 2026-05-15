@@ -247,10 +247,10 @@ export default function Home() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12">
-            <Link href="/solutions" className="w-full sm:w-auto px-7 py-3.5 sm:px-10 sm:py-5 rounded-full bg-black text-white font-bold text-base sm:text-lg hover:bg-neutral-900 transition-[background-color,box-shadow,transform] duration-300 text-center shadow-xl hover:shadow-black/20">
+            <Link href="/solutions" className="w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-5 rounded-full glow-button text-white font-bold text-base sm:text-lg text-center">
               Get Started
             </Link>
-            <Link href="/contact" className="group w-full sm:w-auto px-7 py-3.5 sm:px-10 sm:py-5 rounded-full bg-black/5 border border-black/10 hover:bg-black/10 transition-[background-color,border-color] duration-300 flex items-center justify-center gap-3 font-semibold text-black text-base sm:text-lg backdrop-blur-sm">
+            <Link href="/contact" className="group w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-5 rounded-full bg-black/5 border border-black/10 hover:bg-black/10 transition-[background-color,border-color] duration-300 flex items-center justify-center gap-3 font-semibold text-black text-base sm:text-lg backdrop-blur-sm">
               Book a Demo
               <ChevronRight size={20} className="group-hover:translate-x-1.5 transition-transform" />
             </Link>
@@ -298,7 +298,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="text-left"
           >
-            <h2 className="text-[36px] font-medium tracking-tightest leading-tight text-black mb-4">
+            <h2 className="heading-section text-black mb-4">
               Core Capabilities
             </h2>
             <p className="text-body-premium text-neutral-500 max-w-xl">
@@ -314,7 +314,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: i * 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="glass-card p-7 snap-center w-[calc(100vw-48px)] flex-shrink-0 flex flex-col justify-center min-h-[240px]"
+              className="glass-card p-8 snap-center w-[calc(100vw-48px)] flex-shrink-0 flex flex-col justify-center min-h-[240px]"
             >
               <div className="w-12 h-12 rounded-2xl bg-black/5 border border-black/10 flex items-center justify-center mb-6">
                 <cap.icon size={24} className="text-black" />
@@ -342,7 +342,7 @@ export default function Home() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="text-left"
             >
-              <h2 className="text-[40px] md:text-[54px] font-medium tracking-tightest leading-tight text-black mb-4">
+              <h2 className="heading-section text-black mb-4">
                 Core Capabilities
               </h2>
               <p className="text-body-premium text-neutral-500 max-w-xl">
@@ -356,7 +356,7 @@ export default function Home() {
       </section>
 
       {/* FEATURED PLATFORMS (ANTIGRAVITY STYLE) */}
-      <section className="py-[120px] px-6 relative overflow-x-clip bg-white">
+      <section className="py-[var(--section-padding)] px-6 relative overflow-x-clip bg-white">
         <div className="container mx-auto max-w-7xl relative">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
             <motion.div
@@ -366,7 +366,7 @@ export default function Home() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="text-left"
             >
-              <h2 className="text-[40px] md:text-[54px] font-medium tracking-tightest leading-tight text-black mb-4">
+              <h2 className="heading-section text-black mb-4">
                 Featured Platforms
               </h2>
               <p className="text-body-premium text-neutral-500 max-w-xl">
@@ -389,7 +389,7 @@ export default function Home() {
           <div className="relative">
             <div 
               ref={carouselRef}
-              className="flex gap-6 overflow-x-auto pb-4 no-scrollbar snap-x snap-mandatory"
+              className="flex gap-4 md:gap-6 overflow-x-auto pb-4 no-scrollbar snap-x snap-mandatory"
               style={{ scrollbarWidth: 'none' }}
             >
               {platforms.map((p, i) => (
@@ -402,14 +402,14 @@ export default function Home() {
                   className="flex-shrink-0 w-[85vw] md:w-[calc((100%-3rem)/3)] snap-start"
                 >
                   <Link href={p.link} className="block group">
-                    <div className="relative aspect-square bg-black rounded-[40px] overflow-hidden mb-8 transition-[transform,box-shadow] duration-500">
+                    <div className="relative aspect-square bg-black rounded-[32px] overflow-hidden mb-8 transition-[transform,box-shadow] duration-500">
                       {(p as any).isVideo ? (
                         <video 
                           autoPlay 
                           muted 
                           loop 
                           playsInline 
-                          className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
+                          className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
                         >
                           <source src={p.image} type="video/mp4" />
                         </video>
@@ -455,7 +455,7 @@ export default function Home() {
                 disabled={carouselIndex === 0}
                 className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
                   carouselIndex === 0
-                    ? 'border-neutral-200 text-neutral-300 cursor-not-allowed opacity-40'
+                    ? 'invisible'
                     : 'border-neutral-300 text-neutral-600 hover:bg-black hover:border-black hover:text-white'
                 }`}
                 aria-label="Previous platform"
@@ -467,7 +467,7 @@ export default function Home() {
                 disabled={carouselIndex >= maxCarouselIndex}
                 className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
                   carouselIndex >= maxCarouselIndex
-                    ? 'border-neutral-200 text-neutral-300 cursor-not-allowed opacity-40'
+                    ? 'invisible'
                     : 'bg-black border-black text-white hover:bg-neutral-800'
                 }`}
                 aria-label="Next platform"
@@ -480,7 +480,7 @@ export default function Home() {
       </section>
 
       {/* PLATFORM ECOSYSTEM */}
-      <section className="py-14 px-6">
+      <section className="py-[var(--section-padding)] px-6">
         <div className="container mx-auto max-w-5xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

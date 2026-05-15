@@ -56,13 +56,12 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 mb-16 items-start">
           <div className="col-span-2 md:col-span-4 lg:col-span-2 flex flex-col">
             <Link href="/" className="block">
-              <div className="overflow-hidden" style={{ marginLeft: '-12px', marginTop: '-14px', marginBottom: '-18px', marginRight: '-30px' }}>
+              <div className="relative w-[180px] h-[52px]">
                 <Image
                   src="/logo.png"
                   alt="Stibe Labs Logo"
-                  width={320}
-                  height={90}
-                  className="object-contain w-full max-w-[240px]"
+                  fill
+                  className="object-contain object-left"
                   priority
                 />
               </div>
@@ -78,7 +77,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-2">
                 {links.map((link) => (
                   <li key={link.name}>
-                    <Link href={link.path} className="text-neutral-500 hover:text-black transition-colors text-sm">
+                    <Link href={link.path} className="text-neutral-400 hover:text-black transition-colors text-sm">
                       {link.name}
                     </Link>
                   </li>
@@ -89,12 +88,12 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-black/[0.06] flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-black/30 text-sm">
+          <p className="text-black/50 text-sm">
             &copy; {new Date().getFullYear()} Stibe Labs Pvt Ltd. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="#" className="text-black/30 hover:text-neutral-700 transition-colors text-sm">Privacy</Link>
-            <Link href="#" className="text-black/30 hover:text-neutral-700 transition-colors text-sm">Terms</Link>
+            <Link href="#" className="text-black/50 hover:text-neutral-700 transition-colors text-sm">Privacy</Link>
+            <Link href="#" className="text-black/50 hover:text-neutral-700 transition-colors text-sm">Terms</Link>
           </div>
         </div>
       </div>

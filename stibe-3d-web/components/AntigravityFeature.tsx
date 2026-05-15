@@ -11,7 +11,7 @@ interface AntigravityFeatureProps {
 
 export default function AntigravityFeature({ title, description, videoSrc, reverse = false }: AntigravityFeatureProps) {
   return (
-    <section className="py-14 md:py-20 px-6 overflow-x-clip">
+    <section className="py-[var(--section-padding)] px-6 overflow-x-clip">
       <div className="container mx-auto max-w-7xl">
         <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 lg:gap-24`}>
           {/* TEXT CONTENT */}
@@ -38,13 +38,13 @@ export default function AntigravityFeature({ title, description, videoSrc, rever
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="flex-1 w-full"
           >
-            <div className="relative aspect-video rounded-[32px] md:rounded-[48px] bg-black overflow-hidden shadow-2xl border-[12px] md:border-[16px] border-black group">
+            <div className="relative aspect-video rounded-[32px] bg-black overflow-hidden shadow-2xl border-[12px] md:border-[16px] border-black group">
               <video
                 autoPlay
                 muted
                 loop
                 playsInline
-                className="absolute inset-0 w-full h-full object-cover grayscale brightness-90 contrast-110 group-hover:grayscale-0 group-hover:brightness-100 transition-[filter] duration-500"
+                className="absolute inset-0 w-full h-full object-cover grayscale brightness-90 contrast-110 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100 transition-[filter] duration-500"
               >
                 <source src={videoSrc} type="video/mp4" />
               </video>

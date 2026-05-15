@@ -153,21 +153,21 @@
     font-size: var(--font-hero);
     line-height: 1;
     letter-spacing: -0.02em;
-    font-weight: 450;
+    font-weight: 500;
   }
 
   .heading-section {
     font-size: var(--font-h1);
     line-height: 1.1;
-    letter-spacing: -0.01em;
-    font-weight: 450;
+    letter-spacing: -0.02em;
+    font-weight: 500;
   }
 
   .heading-page {
     font-size: var(--font-h1);
     line-height: 1;
-    letter-spacing: -0.015em;
-    font-weight: 450;
+    letter-spacing: -0.02em;
+    font-weight: 500;
   }
 
   .text-body-premium {
@@ -181,7 +181,7 @@
     font-size: var(--font-nav);
     line-height: 1.1;
     letter-spacing: 0.01em;
-    font-weight: 450;
+    font-weight: 500;
   }
 
   .text-gradient-accent {

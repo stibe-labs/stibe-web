@@ -148,7 +148,7 @@ export default function Navbar() {
                         transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                         onMouseEnter={handleSolutionsEnter}
                         onMouseLeave={handleSolutionsLeave}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-white/95 backdrop-blur-2xl border border-black/[0.08] rounded-2xl shadow-2xl shadow-black/8 p-2 z-50"
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white/95 backdrop-blur-2xl border border-black/[0.08] rounded-2xl shadow-2xl shadow-black/8 p-2 z-50"
                       >
                         {solutionsDropdownItems.map((item) => (
                           <Link
