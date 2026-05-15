@@ -68,38 +68,54 @@ export default function SymbolWaveSection() {
         </motion.div>
       </div>
 
-      {/* 1:1 REPLICA OF THE TEXT SECTION */}
-      <div className="container mx-auto max-w-7xl px-6">
-        <div className="flex flex-col gap-2">
-          <motion.p 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[48px] md:text-[88px] font-[450] tracking-[-0.03em] leading-[1.05] text-[#121317]"
-          >
-            We grow brands
-          </motion.p>
+      {/* TEXT SECTION WITH VIDEO BACKGROUND */}
+      <div className="relative overflow-hidden rounded-[32px] mx-4 md:mx-8">
+        {/* Video Background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/we-grow.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/45" />
 
-          <motion.p 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[48px] md:text-[88px] font-[450] tracking-[-0.03em] leading-[1.05] text-[#121317]"
-          >
-            We don&apos;t do average
-          </motion.p>
+        {/* Text Content */}
+        <div className="relative z-10 container mx-auto max-w-7xl px-8 md:px-12 py-16 md:py-24">
+          <div className="flex flex-col gap-2">
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[48px] md:text-[88px] font-[500] tracking-[-0.03em] leading-[1.05] text-white"
+            >
+              We grow brands
+            </motion.p>
 
-          <motion.p 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[48px] md:text-[88px] font-[450] tracking-[-0.03em] leading-[1.05] text-[#121317]"
-          >
-            We do results
-          </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[48px] md:text-[88px] font-[500] tracking-[-0.03em] leading-[1.05] text-white/80"
+            >
+              We don&apos;t do average
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[48px] md:text-[88px] font-[500] tracking-[-0.03em] leading-[1.05] text-white/60"
+            >
+              We do results
+            </motion.p>
+          </div>
         </div>
       </div>
     </section>
