@@ -29,7 +29,7 @@ function LetterReveal({ letter, delay }: { letter: string; delay: number }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{
         delay,
-        duration: 0.9,
+        duration: 0.7,
         ease: APPEAR_EASE,
         type: 'tween',
       }}
@@ -47,29 +47,44 @@ export default function LoadingScreen({ onExitStart, onComplete }: LoadingScreen
   onCompleteRef.current = onComplete;
   onExitStartRef.current = onExitStart;
 
-  // Counter: 0 → 100 in ~0.6s (6ms per step), then trigger exit after 50ms
+  // Counter: time-accurate using Date.now() + rAF so mobile throttling cannot slow it down.
+  // DURATION is set to match when the last letter finishes animating (1400ms),
+  // ensuring text is fully visible before the screen slides away on every device.
   useEffect(() => {
-    let current = 0;
-    const timer = setInterval(() => {
-      current += 1;
-      setCount(current);
-      if (current >= 100) {
-        clearInterval(timer);
+    const DURATION = 1400; // ms — synced with last letter animation end
+    const start = Date.now();
+    let rafId: number;
+    let done = false;
+
+    const tick = () => {
+      const elapsed = Date.now() - start;
+      const progress = Math.min(Math.floor((elapsed / DURATION) * 100), 100);
+      setCount(progress);
+
+      if (progress >= 100 && !done) {
+        done = true;
         setTimeout(() => {
           onExitStartRef.current?.(); // notify parent BEFORE the slide begins
           setExit(true);
         }, 50);
+        return;
       }
-    }, 6);
-    return () => clearInterval(timer);
+
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
-  // Build letter list with per-letter stagger across both words
+  // Build letter list with per-letter stagger across both words.
+  // Stagger 0.04s, duration 0.7s → last letter (index 8) done at 0.3+8×0.04+0.7 = 1.32s,
+  // which is before the 1.4s counter, so all letters are fully visible when exit triggers.
   const allLetters: { char: string; delay: number }[] = [];
   let letterIndex = 0;
   WORDS.forEach((word, wordIndex) => {
     word.split('').forEach((char) => {
-      allLetters.push({ char, delay: 0.3 + letterIndex * 0.06 });
+      allLetters.push({ char, delay: 0.3 + letterIndex * 0.04 });
       letterIndex++;
     });
     if (wordIndex < WORDS.length - 1) {
