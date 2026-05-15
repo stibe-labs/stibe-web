@@ -44,7 +44,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
 
-  // Counter: 0 → 100 in ~1s (10ms per step), then trigger exit after 150ms
+  // Counter: 0 → 100 in ~0.6s (6ms per step), then trigger exit after 50ms
   useEffect(() => {
     let current = 0;
     const timer = setInterval(() => {
@@ -52,9 +52,9 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
       setCount(current);
       if (current >= 100) {
         clearInterval(timer);
-        setTimeout(() => setExit(true), 150);
+        setTimeout(() => setExit(true), 50);
       }
-    }, 10);
+    }, 6);
     return () => clearInterval(timer);
   }, []);
 
@@ -87,8 +87,8 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             alignItems: 'center',
             justifyContent: 'center',
           }}
-          // qoynco exit: y: '-30%' (partial upward wipe, not full -100%)
-          exit={{ y: '-30%', opacity: 0.1 }}
+          // Clean full upward wipe — no opacity gradient
+          exit={{ y: '-100%', opacity: 1 }}
           transition={{ duration: 0.55, ease: EXIT_EASE }}
         >
           {/* Centered name — letter-by-letter reveal matching qoynco timing */}
