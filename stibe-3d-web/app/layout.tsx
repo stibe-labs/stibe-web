@@ -4,6 +4,7 @@ import '../styles/globals.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PageTransition from '../components/PageTransition';
+import LoadingWrapper from '../components/LoadingWrapper';
 
 const fontMain = Outfit({ 
   subsets: ['latin'],
@@ -28,11 +29,13 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className="flex flex-col min-h-screen bg-white text-black">
-        <Navbar />
-        <main className="flex-grow">
-          <PageTransition>{children}</PageTransition>
-        </main>
-        <Footer />
+        <LoadingWrapper>
+          <Navbar />
+          <main className="flex-grow">
+            <PageTransition>{children}</PageTransition>
+          </main>
+          <Footer />
+        </LoadingWrapper>
       </body>
     </html>
   );
