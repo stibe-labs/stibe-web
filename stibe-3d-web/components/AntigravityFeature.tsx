@@ -11,9 +11,9 @@ interface AntigravityFeatureProps {
 
 export default function AntigravityFeature({ title, description, videoSrc, reverse = false }: AntigravityFeatureProps) {
   return (
-    <section className="py-[var(--section-padding)] px-6 overflow-x-clip">
+    <section className="py-10 lg:py-[var(--section-padding)] px-6 overflow-x-clip">
       <div className="container mx-auto max-w-7xl">
-        <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 lg:gap-24`}>
+        <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-8 lg:gap-24`}>
           {/* TEXT CONTENT */}
           <motion.div
             initial={{ opacity: 0, x: reverse ? 50 : -50 }}
