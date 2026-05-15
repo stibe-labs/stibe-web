@@ -7,7 +7,7 @@ import Link from 'next/link';
 import FloatingIcons from '../../components/FloatingIcons';
 
 const solutionVideos = [
-  { title: 'Enterprise Software & ERP', video: '/software-solution-main.mp4', icon: Layers },
+  { title: 'Enterprise Software & ERP', video: '/sol-erp.mp4', icon: Layers },
   { title: 'Mobile Applications',        video: '/sol-mobile.mp4', icon: Smartphone },
   { title: 'Web & Infrastructure',        video: '/sol-web.mp4', icon: Layout },
   { title: 'AI & Automation',             video: '/sol-ai.mp4', icon: Cpu },
