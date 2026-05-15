@@ -56,7 +56,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 mb-16 items-start">
           <div className="col-span-2 md:col-span-4 lg:col-span-2 flex flex-col">
             <Link href="/" className="block">
-              <div className="relative w-[180px] h-[52px]">
+              <div className="relative w-[240px] h-[70px]">
                 <Image
                   src="/logo.png"
                   alt="Stibe Labs Logo"
