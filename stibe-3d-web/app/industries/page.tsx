@@ -12,42 +12,49 @@ const industries = [
   {
     icon: GraduationCap,
     title: 'Education',
+    id: 'education',
     desc: 'Complete digital ecosystems for educational institutions combining CRM, LMS, and ERP into unified platforms.',
     tags: ['CRM + LMS + ERP', 'Admission Lifecycle', 'Academic Delivery'],
   },
   {
     icon: Scissors,
     title: 'Salon & Personal Care',
+    id: 'salon',
     desc: 'Smart booking systems, customer management, and operational automation for salons, spas, and beauty businesses.',
     tags: ['Booking Automation', 'CRM Integration', 'Multi-branch'],
   },
   {
     icon: Factory,
     title: 'Manufacturing',
+    id: 'manufacturing',
     desc: 'Enterprise resource planning and operational automation systems for streamlined manufacturing workflows.',
     tags: ['ERP Systems', 'Process Automation', 'Analytics'],
   },
   {
     icon: Truck,
     title: 'Logistics',
+    id: 'logistics',
     desc: 'Integrated ERP and automation solutions for efficient logistics operations, fleet management, and supply chain.',
     tags: ['ERP + Automation', 'Fleet Management', 'Tracking'],
   },
   {
     icon: ShoppingCart,
     title: 'Retail & E-commerce',
+    id: 'retail',
     desc: 'Scalable digital platforms and performance marketing systems for retail businesses and e-commerce operations.',
     tags: ['Platforms', 'Marketing Systems', 'Analytics'],
   },
   {
     icon: Activity,
     title: 'Healthcare',
+    id: 'healthcare',
     desc: 'Digital systems and intelligent automation for healthcare providers, clinics, and medical service organizations.',
     tags: ['Digital Systems', 'Automation', 'Patient Management'],
   },
   {
     icon: Building2,
     title: 'Startups & SMEs',
+    id: 'startups',
     desc: 'Scalable digital infrastructure and growth systems designed for startups and small-to-medium enterprises.',
     tags: ['Scalable Infrastructure', 'Growth Systems', 'SaaS'],
   },
@@ -62,7 +69,7 @@ function IndustryCard({ ind }: { ind: any }) {
   const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [14, 7, 1]);
 
   return (
-    <div ref={ref} className="relative min-h-[80vh] sm:min-h-[110vh] w-full flex items-center justify-center px-4 sm:px-6">
+    <div id={ind.id} ref={ref} className="relative min-h-[80vh] sm:min-h-[110vh] w-full flex items-center justify-center px-4 sm:px-6 scroll-mt-20">
       <div className="relative w-full max-w-5xl min-h-[62vh] sm:h-[75vh] flex flex-col items-center justify-center sm:justify-end pb-0 sm:pb-20 pt-6 sm:pt-0">
         
         {/* 3D Background Card Layer */}

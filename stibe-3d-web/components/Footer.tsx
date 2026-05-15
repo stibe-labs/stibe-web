@@ -17,14 +17,14 @@ const footerLinks = {
     { name: 'Digital Growth', path: '/solutions/digital-marketing' },
   ],
   Platforms: [
-    { name: 'Stibe CRM', path: '/platforms' },
-    { name: 'Stibe LMS', path: '/platforms' },
-    { name: 'Salon Booking', path: '/platforms' },
+    { name: 'Stibe CRM', path: '/platforms#crm' },
+    { name: 'Stibe LMS', path: '/platforms#lms' },
+    { name: 'Salon Booking', path: '/platforms#salon' },
   ],
   Industries: [
-    { name: 'Education', path: '/industries' },
-    { name: 'Manufacturing', path: '/industries' },
-    { name: 'Retail', path: '/industries' },
+    { name: 'Education', path: '/industries#education' },
+    { name: 'Manufacturing', path: '/industries#manufacturing' },
+    { name: 'Retail', path: '/industries#retail' },
   ],
 };
 
